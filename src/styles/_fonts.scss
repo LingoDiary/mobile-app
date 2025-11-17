@@ -1,0 +1,185 @@
+$basiquePro: "/assets/fonts/basique-pro/";
+$ttChocolates: "/assets/fonts/tt-chocolates/";
+
+@font-face {
+  font-family: 'Basique Pro';
+  src: url($basiquePro + 'Basique.eot');
+  src: local('Basique Pro Black'), local('Basique'),
+  url($basiquePro + 'Basique.eot?#iefix') format('embedded-opentype'),
+  url($basiquePro + 'Basique.woff2') format('woff2'),
+  url($basiquePro + 'Basique.woff') format('woff'),
+  url($basiquePro + 'Basique.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Basique Pro';
+  src: url($basiquePro + 'Basique_1.eot');
+  src: local('Basique Pro Bold'), local('Basique'),
+  url($basiquePro + 'Basique_1.eot?#iefix') format('embedded-opentype'),
+  url($basiquePro + 'Basique_1.woff2') format('woff2'),
+  url($basiquePro + 'Basique_1.woff') format('woff'),
+  url($basiquePro + 'Basique_1.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Basique Pro';
+  src: url($basiquePro + 'Basique_2.eot');
+  src: local('Basique Pro'), local('Basique'),
+  url($basiquePro + 'Basique_2.eot?#iefix') format('embedded-opentype'),
+  url($basiquePro + 'Basique_2.woff2') format('woff2'),
+  url($basiquePro + 'Basique_2.woff') format('woff'),
+  url($basiquePro + 'Basique_2.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Basique Pro';
+  src: url($basiquePro + 'Basique_3.eot');
+  src: local('Basique Pro Light'), local('Basique'),
+  url($basiquePro + 'Basique_3.eot?#iefix') format('embedded-opentype'),
+  url($basiquePro + 'Basique_3.woff2') format('woff2'),
+  url($basiquePro + 'Basique_3.woff') format('woff'),
+  url($basiquePro + 'Basique_3.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Basique Pro';
+  src: url($basiquePro + 'Basique_4.eot');
+  src: local('Basique Pro Thin'), local('Basique'),
+  url($basiquePro + 'Basique_4.eot?#iefix') format('embedded-opentype'),
+  url($basiquePro + 'Basique_4.woff2') format('woff2'),
+  url($basiquePro + 'Basique_4.woff') format('woff'),
+  url($basiquePro + 'Basique_4.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+
+
+@font-face {
+  font-family: 'TT Chocolates';
+  src: url($ttChocolates + 'TTChocolates-Black.eot');
+  src: local('TT Chocolates Black'), local('TTChocolates-Black'),
+  url($ttChocolates + 'TTChocolates-Black.eot?#iefix') format('embedded-opentype'),
+  url($ttChocolates + 'TTChocolates-Black.woff2') format('woff2'),
+  url($ttChocolates + 'TTChocolates-Black.woff') format('woff'),
+  url($ttChocolates + 'TTChocolates-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Chocolates';
+  src: url($ttChocolates + 'TTChocolates-Thin.eot');
+  src: local('TT Chocolates Thin'), local('TTChocolates-Thin'),
+  url($ttChocolates + 'TTChocolates-Thin.eot?#iefix') format('embedded-opentype'),
+  url($ttChocolates + 'TTChocolates-Thin.woff2') format('woff2'),
+  url($ttChocolates + 'TTChocolates-Thin.woff') format('woff'),
+  url($ttChocolates + 'TTChocolates-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Chocolates';
+  src: url($ttChocolates + 'TTChocolates-ThinItalic.eot');
+  src: local('TT Chocolates Thin Italic'), local('TTChocolates-ThinItalic'),
+  url($ttChocolates + 'TTChocolates-ThinItalic.eot?#iefix') format('embedded-opentype'),
+  url($ttChocolates + 'TTChocolates-ThinItalic.woff2') format('woff2'),
+  url($ttChocolates + 'TTChocolates-ThinItalic.woff') format('woff'),
+  url($ttChocolates + 'TTChocolates-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TT Chocolates';
+  src: url($ttChocolates + 'TTChocolates-Bold.eot');
+  src: local('TT Chocolates Bold'), local('TTChocolates-Bold'),
+  url($ttChocolates + 'TTChocolates-Bold.eot?#iefix') format('embedded-opentype'),
+  url($ttChocolates + 'TTChocolates-Bold.woff2') format('woff2'),
+  url($ttChocolates + 'TTChocolates-Bold.woff') format('woff'),
+  url($ttChocolates + 'TTChocolates-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Chocolates';
+  src: url($ttChocolates + 'TTChocolates-LightItalic.eot');
+  src: local('TT Chocolates Light Italic'), local('TTChocolates-LightItalic'),
+  url($ttChocolates + 'TTChocolates-LightItalic.eot?#iefix') format('embedded-opentype'),
+  url($ttChocolates + 'TTChocolates-LightItalic.woff2') format('woff2'),
+  url($ttChocolates + 'TTChocolates-LightItalic.woff') format('woff'),
+  url($ttChocolates + 'TTChocolates-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TT Chocolates';
+  src: url($ttChocolates + 'TTChocolates-BlackItalic.eot');
+  src: local('TT Chocolates Black Italic'), local('TTChocolates-BlackItalic'),
+  url($ttChocolates + 'TTChocolates-BlackItalic.eot?#iefix') format('embedded-opentype'),
+  url($ttChocolates + 'TTChocolates-BlackItalic.woff2') format('woff2'),
+  url($ttChocolates + 'TTChocolates-BlackItalic.woff') format('woff'),
+  url($ttChocolates + 'TTChocolates-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TT Chocolates';
+  src: url($ttChocolates + 'TTChocolates-BoldItalic.eot');
+  src: local('TT Chocolates Bold Italic'), local('TTChocolates-BoldItalic'),
+  url($ttChocolates + 'TTChocolates-BoldItalic.eot?#iefix') format('embedded-opentype'),
+  url($ttChocolates + 'TTChocolates-BoldItalic.woff2') format('woff2'),
+  url($ttChocolates + 'TTChocolates-BoldItalic.woff') format('woff'),
+  url($ttChocolates + 'TTChocolates-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TT Chocolates';
+  src: url($ttChocolates + 'TTChocolates-Regular.eot');
+  src: local('TT Chocolates Regular'), local('TTChocolates-Regular'),
+  url($ttChocolates + 'TTChocolates-Regular.eot?#iefix') format('embedded-opentype'),
+  url($ttChocolates + 'TTChocolates-Regular.woff2') format('woff2'),
+  url($ttChocolates + 'TTChocolates-Regular.woff') format('woff'),
+  url($ttChocolates + 'TTChocolates-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Chocolates';
+  src: url($ttChocolates + 'TTChocolates-Light.eot');
+  src: local('TT Chocolates Light'), local('TTChocolates-Light'),
+  url($ttChocolates + 'TTChocolates-Light.eot?#iefix') format('embedded-opentype'),
+  url($ttChocolates + 'TTChocolates-Light.woff2') format('woff2'),
+  url($ttChocolates + 'TTChocolates-Light.woff') format('woff'),
+  url($ttChocolates + 'TTChocolates-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Chocolates';
+  src: url($ttChocolates + 'TTChocolates-Italic.eot');
+  src: local('TT Chocolates Italic'), local('TTChocolates-Italic'),
+  url($ttChocolates + 'TTChocolates-Italic.eot?#iefix') format('embedded-opentype'),
+  url($ttChocolates + 'TTChocolates-Italic.woff2') format('woff2'),
+  url($ttChocolates + 'TTChocolates-Italic.woff') format('woff'),
+  url($ttChocolates + 'TTChocolates-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+

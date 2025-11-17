@@ -1,0 +1,38 @@
+<app-content>
+  <div wrapper>
+    <div class="onboarding">
+
+      @if(step() > 0) {
+        <div class="onboarding__steps">
+          Step <b>{{ step() }} form {{ totalSteps }}</b>
+        </div>
+      }
+
+      <!-- Welcome screen -->
+      @if(!step()) {
+        <div class="onboarding__step greeting">
+          <div class="onboarding__box">
+            <div class="onboarding__heading">
+              Welcome to <br /> Lingo Diary
+            </div>
+            <div class="onboarding__subheading text-center">We will help you improve your English through diary keeping and AI assistance.</div>
+            <div class="onboarding__step-image content-centered">
+              <img width="201" height="222" [src]="img('onboarding/greeting.png')" alt="greeting.svg" />
+            </div>
+            <div class="onboarding__text text-center">
+              Let's set up your profile!
+            </div>
+          </div>
+          <div class="onboarding__next-btn">
+
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+  <div action>
+    <app-button (click)="next()" [extraClass]="'full-width'">
+      Next
+    </app-button>
+  </div>
+</app-content>

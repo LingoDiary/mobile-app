@@ -1,0 +1,17 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1rem;
+
+  &__wrapper {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 1rem 1rem 0;
+  }
+
+  &__action {
+    flex-shrink: 0;
+    padding: 0 1rem 1rem;
+  }
+}
