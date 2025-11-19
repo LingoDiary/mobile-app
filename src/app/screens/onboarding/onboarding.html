@@ -1,38 +1,71 @@
 <app-content>
   <div wrapper>
-    <div class="onboarding">
 
-      @if(step() > 0) {
-        <div class="onboarding__steps">
-          Step <b>{{ step() }} form {{ totalSteps }}</b>
+      <div class="onboarding__steps">
+        @if(step() > 0) {
+          @for (step of steps; track step.id) {
+            <div class="onboarding__steps-item {{ step.status }}"></div>
+          }
+        }
+      </div>
+
+
+    <!-- Welcome screen -->
+    @if(!step()) {
+      <div class="onboarding__box greeting">
+        <div class="onboarding__heading">
+          Welcome to <br /> Lingo Diary
         </div>
-      }
-
-      <!-- Welcome screen -->
-      @if(!step()) {
-        <div class="onboarding__step greeting">
-          <div class="onboarding__box">
-            <div class="onboarding__heading">
-              Welcome to <br /> Lingo Diary
-            </div>
-            <div class="onboarding__subheading text-center">We will help you improve your English through diary keeping and AI assistance.</div>
-            <div class="onboarding__step-image content-centered">
-              <img width="201" height="222" [src]="img('onboarding/greeting.png')" alt="greeting.svg" />
-            </div>
-            <div class="onboarding__text text-center">
-              Let's set up your profile!
-            </div>
-          </div>
-          <div class="onboarding__next-btn">
-
-          </div>
+        <div class="onboarding__subheading text-center">We will help you improve your English through diary keeping and AI assistance.</div>
+        <div class="onboarding__step-image content-centered">
+          <img width="201" height="222" [src]="img('onboarding/greeting.png')" alt="greeting.svg" />
         </div>
-      }
-    </div>
+        <div class="onboarding__text text-center">
+          Let's set up your profile!
+        </div>
+      </div>
+    }
+    @if(step() === 1) {
+      <div class="onboarding__box">
+        <div class="onboarding__heading title">
+          Enter your name
+        </div>
+        <div class="onboarding__subheading text-center">This will help your mentor address you personally.</div>
+        <app-name (validChange)="onStepValidChange($event)" />
+      </div>
+    }
+    @if(step() === 2) {
+      <div class="onboarding__box">
+        <div class="onboarding__heading title">
+          Choose your mentor
+        </div>
+        <div class="onboarding__subheading text-center">Swipe left/right to choose:</div>
+        <app-mentors />
+      </div>
+    }
+    @if(step() === 3) {
+      <div class="onboarding__box">
+        <div class="onboarding__heading title">
+          Select your native language
+        </div>
+        <div class="onboarding__subheading text-center">This will help your mentor provide clear explanations.:</div>
+        <app-native-languages />
+      </div>
+    }
   </div>
   <div action>
-    <app-button (click)="next()" [extraClass]="'full-width'">
-      Next
-    </app-button>
+    <div class="onboarding__actions" [ngClass]="step() > 1 ? 'active' : ''">
+      @if(step() > 1) {
+        <app-button (click)="previous()" [extraClass]="'full-width'" [type]="'outline'">
+          <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 9C0 9.3418 0.126953 9.63477 0.400391 9.88867L7.99805 17.3301C8.21289 17.5449 8.48633 17.6621 8.80859 17.6621C9.45312 17.6621 9.9707 17.1543 9.9707 16.5C9.9707 16.1777 9.83398 15.8945 9.61914 15.6699L2.77344 9L9.61914 2.33008C9.83398 2.10547 9.9707 1.8125 9.9707 1.5C9.9707 0.845703 9.45312 0.337891 8.80859 0.337891C8.48633 0.337891 8.21289 0.455078 7.99805 0.669922L0.400391 8.10156C0.126953 8.36523 0 8.6582 0 9Z" fill="black"/>
+          </svg>
+        </app-button>
+      }
+      <app-button (click)="next()" [extraClass]="'full-width'" [disabled]="isNextEnabled()">
+        Next
+      </app-button>
+    </div>
+
   </div>
 </app-content>

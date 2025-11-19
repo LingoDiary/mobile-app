@@ -1,0 +1,45 @@
+<div class="mentors">
+
+  <div
+    class="mentors__wrapper"
+    (touchstart)="startTouch($event)"
+    (touchend)="endTouch($event)"
+    [style.transform]="'translateX(-' + activeIndex() * 100 + '%)'"
+    style="display: flex; transition: transform 0.3s;"
+  >
+    @for (m of mentors; track m.id) {
+      <div
+        class="mentors__item"
+        style="min-width: 100%; text-align: center;"
+        draggable="false"
+      >
+        <img
+          width="200"
+          height="200"
+          class="mentors__item-avatar"
+          [src]="m.avatar"
+          [alt]="m.name"
+        />
+
+        <div class="mentors__item-name">
+          <span>{{ m.name }}</span>
+        </div>
+
+        <div class="mentors__item-slogan">
+          {{ m.slogan }}
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="mentors__dots">
+    @for (m of mentors; track m.id; let index = $index) {
+      <div
+        class="mentors__dots-item"
+        [class.active]="index === activeIndex()"
+        (click)="selectIndex(index)"
+      ></div>
+    }
+  </div>
+
+</div>

@@ -1,0 +1,30 @@
+.native-languages {
+  padding: 2rem 0;
+
+  &__item {
+    display: grid;
+    grid-template-columns: 1fr 2rem;
+    gap: 1rem;
+    padding: 1rem 0;
+    border: none;
+    width: 100%;
+    background: none;
+
+    &-content {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-family: var(--text-font), sans-serif;
+    }
+
+    &-state {
+      transform: rotate(45deg);
+      position: relative;
+      left: 0.8rem;
+      width: 0.6rem;
+      height: 1rem;
+      border-right: 2px solid var(--black);
+      border-bottom: 2px solid var(--black);
+    }
+  }
+}

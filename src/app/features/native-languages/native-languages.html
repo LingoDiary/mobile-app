@@ -1,0 +1,17 @@
+<div class="native-languages">
+  @for (language of nativeLanguages; track language.id) {
+    <button
+      type="button"
+      (click)="setNativeLanguage(language.id)"
+      class="native-languages__item"
+    >
+      <span class="native-languages__item-content">
+        {{ language.name }}
+      </span>
+
+      @if (selectedNativeLanguageId() === language.id) {
+        <span class="native-languages__item-state"></span>
+      }
+    </button>
+  }
+</div>

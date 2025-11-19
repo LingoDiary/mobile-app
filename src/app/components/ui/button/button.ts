@@ -10,6 +10,7 @@ export class Button {
 
   @Input() type: string = 'default';
   @Input() extraClass: string = '';
+  @Input() disabled: boolean = false;
 
 
 }

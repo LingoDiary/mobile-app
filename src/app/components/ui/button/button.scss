@@ -3,8 +3,8 @@
   outline: none;
   box-shadow: none;
   border: 1px solid;
-  padding: 0.85rem 3rem;
-  border-radius: 2rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 600;
   text-decoration: none;
