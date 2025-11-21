@@ -6,6 +6,7 @@ import {Mentors} from '@app/features/mentors/mentors';
 import {NgClass} from '@angular/common';
 import {NativeLanguages} from '@app/features/native-languages/native-languages';
 import {Name} from '@app/features/name/name';
+import {LanguageLevels} from '@app/features/language-level/language-levels';
 
 @Component({
   selector: 'app-onboarding',
@@ -16,7 +17,8 @@ import {Name} from '@app/features/name/name';
     Mentors,
     NgClass,
     NativeLanguages,
-    Name
+    Name,
+    LanguageLevels
   ],
   templateUrl: './onboarding.html',
   styleUrl: './onboarding.scss',

@@ -4,7 +4,7 @@ import {NativeLanguage} from '@app/data/interfaces/NativeLanguage';
 
 @Component({
   selector: 'app-native-languages',
-  imports: [],
+  standalone: true,
   templateUrl: './native-languages.html',
   styleUrl: './native-languages.scss',
 })

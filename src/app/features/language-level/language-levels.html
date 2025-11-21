@@ -1,0 +1,12 @@
+<div class="language-levels">
+  @for (level of languageLevels; track level.id) {
+    <button
+      type="button"
+      class="language-levels__item {{ level.code }} {{ selectedId() === level.id ? 'active' : '' }}"
+      (click)="set(level.id)"
+    >
+      <span class="language-levels__item-name">{{ level.name }}</span>
+      <span class="language-levels__item-slogan">{{ level.description }}</span>
+    </button>
+  }
+</div>

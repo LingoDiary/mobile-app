@@ -1,0 +1,51 @@
+.language-levels {
+  padding: 2rem 0;
+
+  &__item {
+    margin-bottom: 16px;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 3px solid transparent;
+    width: 100%;
+    display: grid;
+    text-align: left;
+
+    &-name {
+      font-family: var(--heading-font), sans-serif;
+    }
+
+    &-slogan {
+      font-family: var(--text-font), sans-serif;
+    }
+
+    &.beginner {
+      background: #fce9c7;
+
+      &.active {
+        border-color: #ffc900;
+      }
+    }
+
+    &.intermediate {
+      background: #ebfffb;
+
+      &.active {
+        border-color: #80d3ff;
+      }
+    }
+
+    &.advanced {
+      background: #e8dbf4;
+
+      &.active {
+        border-color: #babfff;
+      }
+    }
+
+    &-name {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      font-size: 1.2rem;
+    }
+  }
+}

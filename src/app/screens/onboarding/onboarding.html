@@ -48,8 +48,17 @@
         <div class="onboarding__heading title">
           Select your native language
         </div>
-        <div class="onboarding__subheading text-center">This will help your mentor provide clear explanations.:</div>
+        <div class="onboarding__subheading text-center">This will help your mentor provide clear explanations.</div>
         <app-native-languages />
+      </div>
+    }
+    @if(step() === 4) {
+      <div class="onboarding__box">
+        <div class="onboarding__heading title">
+          Select your English level
+        </div>
+        <div class="onboarding__subheading text-center">This will help tailor the mentor to your level.</div>
+        <app-language-levels />
       </div>
     }
   </div>
