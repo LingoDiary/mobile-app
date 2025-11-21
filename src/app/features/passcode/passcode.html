@@ -1,0 +1,18 @@
+<div class="passcode">
+  @for (item of items; track $index) {
+    <input
+      #pin
+      class="passcode__input"
+      type="password"
+      inputmode="decimal"
+      autocomplete="one-time-code"
+      maxlength="1"
+      [value]="values()[$index]"
+      [disabled]="$index > 0 && values()[$index - 1] === ''"
+      (input)="handleInput($event, $index)"
+      (keydown)="handleKeydown($event, $index)"
+      (paste)="handlePaste($event)"
+      (click)="focus($index)"
+    />
+  }
+</div>

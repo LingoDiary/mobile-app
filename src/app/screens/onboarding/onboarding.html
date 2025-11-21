@@ -2,7 +2,7 @@
   <div wrapper>
 
       <div class="onboarding__steps">
-        @if(step() > 0) {
+        @if(step() > 0 && step() < 7) {
           @for (step of steps; track step.id) {
             <div class="onboarding__steps-item {{ step.status }}"></div>
           }
@@ -61,19 +61,57 @@
         <app-language-levels />
       </div>
     }
+    @if(step() === 5) {
+      <div class="onboarding__box">
+        <div class="onboarding__heading title">
+          Set a security code
+        </div>
+        <div class="onboarding__subheading text-center">Your records are private. Set a security to protect them.</div>
+        <app-passcode />
+      </div>
+    }
+    @if(step() === 6) {
+      <div class="onboarding__box">
+        <div class="onboarding__heading title">
+          Set up reminders
+        </div>
+        <div class="onboarding__subheading text-center">Choose a convenient time. We’ll send reminders to your phone.</div>
+        <app-reminder />
+      </div>
+    }
+
+    @if(step() === 7) {
+      <div class="onboarding__box">
+        <div class="onboarding__heading">
+          Your mentor is waiting to start with you
+        </div>
+        <div class="onboarding__complete">
+          <img width="215" height="215" [src]="img('onboarding/complete.svg')" alt="complete.svg" />
+        </div>
+        <div class="onboarding__subheading text-center">For the next 7 days you’ll explore English together: write, learn, and receive AI-powered guidance.</div>
+      </div>
+    }
   </div>
   <div action>
-    <div class="onboarding__actions" [ngClass]="step() > 1 ? 'active' : ''">
-      @if(step() > 1) {
+    <div class="onboarding__actions" [ngClass]="step() > 1 && step() < 7 ? 'active' : ''">
+      @if(step() > 1 && step() < 7) {
         <app-button (click)="previous()" [extraClass]="'full-width'" [type]="'outline'">
           <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 9C0 9.3418 0.126953 9.63477 0.400391 9.88867L7.99805 17.3301C8.21289 17.5449 8.48633 17.6621 8.80859 17.6621C9.45312 17.6621 9.9707 17.1543 9.9707 16.5C9.9707 16.1777 9.83398 15.8945 9.61914 15.6699L2.77344 9L9.61914 2.33008C9.83398 2.10547 9.9707 1.8125 9.9707 1.5C9.9707 0.845703 9.45312 0.337891 8.80859 0.337891C8.48633 0.337891 8.21289 0.455078 7.99805 0.669922L0.400391 8.10156C0.126953 8.36523 0 8.6582 0 9Z" fill="black"/>
           </svg>
         </app-button>
       }
+      @if(step() < 7) {
       <app-button (click)="next()" [extraClass]="'full-width'" [disabled]="isNextEnabled()">
         Next
       </app-button>
+      }
+
+      @if(step() === 7) {
+        <app-button (click)="subscribe()" [extraClass]="'full-width'">
+          Free for 7 days, $4.99/month after
+        </app-button>
+      }
     </div>
 
   </div>

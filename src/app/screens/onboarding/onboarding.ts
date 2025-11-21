@@ -7,6 +7,8 @@ import {NgClass} from '@angular/common';
 import {NativeLanguages} from '@app/features/native-languages/native-languages';
 import {Name} from '@app/features/name/name';
 import {LanguageLevels} from '@app/features/language-level/language-levels';
+import {Passcode} from '@app/features/passcode/passcode';
+import {Reminder} from '@app/features/reminder/reminder';
 
 @Component({
   selector: 'app-onboarding',
@@ -18,7 +20,9 @@ import {LanguageLevels} from '@app/features/language-level/language-levels';
     NgClass,
     NativeLanguages,
     Name,
-    LanguageLevels
+    LanguageLevels,
+    Passcode,
+    Reminder
   ],
   templateUrl: './onboarding.html',
   styleUrl: './onboarding.scss',
@@ -30,14 +34,14 @@ export class Onboarding implements OnInit {
   step = signal<number>(0);
   stepValid = signal<boolean>(true);
 
-  totalSteps: number = 6;
+  totalSteps: number = 7;
   steps: Array<{
     id: number;
     status: string
   }> = [];
 
   ngOnInit(): void {
-    this.steps = Array.from({length: this.totalSteps}, (_, i) => ({
+    this.steps = Array.from({length: this.totalSteps - 1}, (_, i) => ({
       id: i + 1,
       status: (this.step() >= i + 1) ? 'active' : 'inactive',
     }));
@@ -76,6 +80,13 @@ export class Onboarding implements OnInit {
   }
 
   isNextEnabled(): boolean {
+    if (!this.step()) {
+      return false;
+    }
+    return !this.stepValid();
+  }
+
+  subscribe(): boolean {
     if (!this.step()) {
       return false;
     }
