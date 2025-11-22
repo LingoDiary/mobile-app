@@ -1,3 +1,4 @@
+a,
 button,
 input,
 textarea {
@@ -19,4 +20,25 @@ textarea {
 
 .full-width {
   width: 100%;
+}
+
+.screen {
+
+  &__heading {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    font-family: var(--basiquePro), sans-serif;
+  }
+
+  &__action {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 3;
+    .btn {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19) !important;
+    }
+  }
+
 }

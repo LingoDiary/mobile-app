@@ -12,6 +12,7 @@
   display: block;
   font-size: 1rem;
   font-family: var(--text-font), sans-serif;
+  line-height: 0;
 
   &-default {
     background: var(--black);
