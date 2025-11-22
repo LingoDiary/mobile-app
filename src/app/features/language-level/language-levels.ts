@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, signal} from '@angular/core';
-import {languageLevels} from '@app/data/language-levels';
-import {LanguageLevel} from '@app/data/interfaces/LanguageLevel';
+import {languageLevels} from '../../../core/data/language-levels';
+import {LanguageLevel} from '../../../core/data/interfaces/LanguageLevel';
 
 @Component({
   selector: 'app-language-levels',
@@ -25,7 +25,7 @@ export class LanguageLevels implements OnInit {
     this.selectedId.set(id);
     this.validChange.emit(true);
     this.stateChange.emit({
-      key: 'language_level_id',
+      key: 'languageLevelId',
       value: id,
     });
   }

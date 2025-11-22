@@ -1,5 +1,5 @@
 
-import {LanguageLevel} from '@app/data/interfaces/LanguageLevel';
+import {LanguageLevel} from './interfaces/LanguageLevel';
 
 export const languageLevels: Array<LanguageLevel> = [
   {

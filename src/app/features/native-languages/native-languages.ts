@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, signal} from '@angular/core';
-import {nativeLanguages} from '@app/data/native-languages';
-import {NativeLanguage} from '@app/data/interfaces/NativeLanguage';
+import {nativeLanguages} from '../../../core/data/native-languages';
+import {NativeLanguage} from '../../../core/data/interfaces/NativeLanguage';
 
 @Component({
   selector: 'app-native-languages',
@@ -25,7 +25,7 @@ export class NativeLanguages implements OnInit {
     this.selectedNativeLanguageId.set(id);
     this.validChange.emit(true);
     this.stateChange.emit({
-      key: 'native_language_id',
+      key: 'nativeLanguageId',
       value: id,
     });
   }

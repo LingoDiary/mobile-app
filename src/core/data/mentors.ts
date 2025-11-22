@@ -1,4 +1,4 @@
-import {Mentor} from '@app/data/interfaces/Mentor';
+import {Mentor} from './interfaces/Mentor';
 import {img} from '@app/shared/utils/helpers';
 
 export const mentors: Array<Mentor> = [

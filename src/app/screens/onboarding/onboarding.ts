@@ -1,4 +1,4 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {img} from '@app/shared/utils/helpers';
 import {Content} from '@app/components/content/content';
 import {Button} from '@app/components/ui/button/button';
@@ -9,11 +9,9 @@ import {Name} from '@app/features/name/name';
 import {LanguageLevels} from '@app/features/language-level/language-levels';
 import {Passcode} from '@app/features/passcode/passcode';
 import {Reminder} from '@app/features/reminder/reminder';
+import {UserDTO} from '../../../core/dto/user.dto';
+import {UserRepository} from '../../../core/storage/user.storage';
 
-export interface StepState {
-  valid: boolean;
-  data: { [key: string]: any } | null;
-}
 
 @Component({
   selector: 'app-onboarding',
@@ -33,6 +31,8 @@ export interface StepState {
   styleUrl: './onboarding.scss',
 })
 export class Onboarding implements OnInit {
+
+  private readonly userRepository: UserRepository = inject(UserRepository);
 
   protected readonly img = img;
 
@@ -94,7 +94,6 @@ export class Onboarding implements OnInit {
     this.stepStates[this.step()] = data;
   }
 
-  // Возвращает true если кнопка должна быть ОТКЛЮЧЕНА
   isNextDisabled(): boolean {
     const stepsWithoutValidation = [0, 7];
 
@@ -105,8 +104,33 @@ export class Onboarding implements OnInit {
     return !this.stepValid();
   }
 
-  subscribe(): void {
-    console.log(this.stepStates);
+  async subscribe(): Promise<void> {
+    const dataMap = this.stepStates.reduce((acc, item) => {
+      acc[item.key] = item.value;
+      return acc;
+    }, {} as Record<string, any>);
+
+    const user: UserDTO = {
+      name: dataMap['name'] ?? '',
+      mentorId: dataMap['mentor_id'] ?? 0,
+      nativeLanguageId: dataMap['native_language_id'] ?? 0,
+      languageLevelId: dataMap['language_level_id'] ?? 0,
+      passcode: dataMap['passcode'] ?? null,
+      reminder: dataMap['reminder']
+        ? {
+          hour: dataMap['reminder'].hour.toString(),
+          minutes: dataMap['reminder'].minute.toString(),
+        }
+        : null,
+      isOnboarded: true,
+      isTutorialCompleted: false,
+      createdAt: new Date().toISOString(),
+      updatedAt: null,
+    };
+
+    const result = await this.userRepository.create(user);
+    console.log(result);
+
   }
 
   private recalcSteps(): void {

@@ -1,5 +1,5 @@
 
-import {NativeLanguage} from '@app/data/interfaces/NativeLanguage';
+import {NativeLanguage} from './interfaces/NativeLanguage';
 
 export const nativeLanguages: Array<NativeLanguage> = [
   {
@@ -12,14 +12,14 @@ export const nativeLanguages: Array<NativeLanguage> = [
   },
   {
     id: 3,
-    name: 'Belarusian'
-  },
-  {
-    id: 3,
     name: 'Polish'
   },
   {
     id: 4,
     name: 'Czech'
+  },
+  {
+    id: 5,
+    name: 'Belarusian'
   },
 ];

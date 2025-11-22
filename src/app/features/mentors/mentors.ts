@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, signal} from '@angular/core';
-import {Mentor} from '@app/data/interfaces/Mentor';
-import {mentors} from '@app/data/mentors';
+import {Mentor} from '../../../core/data/interfaces/Mentor';
+import {mentors} from '../../../core/data/mentors';
 
 
 
@@ -67,7 +67,7 @@ export class Mentors implements OnInit {
 
   selectIndex() {
     this.stateChange.emit({
-      key: 'mentor_id',
+      key: 'mentorId',
       value: this.mentors[this.activeIndex()].id,
     });
   }
