@@ -31,7 +31,10 @@
           Enter your name
         </div>
         <div class="onboarding__subheading text-center">This will help your mentor address you personally.</div>
-        <app-name (validChange)="onStepValidChange($event)" />
+        <app-name
+          (validChange)="onStepValidChange($event)"
+          (stateChange)="onStepStateChange($event)"
+        />
       </div>
     }
     @if(step() === 2) {
@@ -40,7 +43,10 @@
           Choose your mentor
         </div>
         <div class="onboarding__subheading text-center">Swipe left/right to choose:</div>
-        <app-mentors />
+        <app-mentors
+          (validChange)="onStepValidChange($event)"
+          (stateChange)="onStepStateChange($event)"
+        />
       </div>
     }
     @if(step() === 3) {
@@ -49,7 +55,10 @@
           Select your native language
         </div>
         <div class="onboarding__subheading text-center">This will help your mentor provide clear explanations.</div>
-        <app-native-languages />
+        <app-native-languages
+          (validChange)="onStepValidChange($event)"
+          (stateChange)="onStepStateChange($event)"
+        />
       </div>
     }
     @if(step() === 4) {
@@ -58,7 +67,10 @@
           Select your English level
         </div>
         <div class="onboarding__subheading text-center">This will help tailor the mentor to your level.</div>
-        <app-language-levels />
+        <app-language-levels
+          (validChange)="onStepValidChange($event)"
+          (stateChange)="onStepStateChange($event)"
+        />
       </div>
     }
     @if(step() === 5) {
@@ -67,7 +79,10 @@
           Set a security code
         </div>
         <div class="onboarding__subheading text-center">Your records are private. Set a security to protect them.</div>
-        <app-passcode />
+        <app-passcode
+          (validChange)="onStepValidChange($event)"
+          (stateChange)="onStepStateChange($event)"
+        />
       </div>
     }
     @if(step() === 6) {
@@ -76,7 +91,10 @@
           Set up reminders
         </div>
         <div class="onboarding__subheading text-center">Choose a convenient time. We’ll send reminders to your phone.</div>
-        <app-reminder />
+        <app-reminder
+          (validChange)="onStepValidChange($event)"
+          (stateChange)="onStepStateChange($event)"
+        />
       </div>
     }
 
@@ -102,9 +120,9 @@
         </app-button>
       }
       @if(step() < 7) {
-      <app-button (click)="next()" [extraClass]="'full-width'" [disabled]="isNextEnabled()">
-        Next
-      </app-button>
+        <app-button (click)="next()" [extraClass]="'full-width'" [disabled]="isNextDisabled()">
+          Next
+        </app-button>
       }
 
       @if(step() === 7) {

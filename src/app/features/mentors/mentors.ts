@@ -1,4 +1,4 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, signal} from '@angular/core';
 import {Mentor} from '@app/data/interfaces/Mentor';
 import {mentors} from '@app/data/mentors';
 
@@ -12,17 +12,25 @@ import {mentors} from '@app/data/mentors';
 })
 export class Mentors implements OnInit {
 
+  @Output() validChange = new EventEmitter<boolean>();
+  @Output() stateChange = new EventEmitter<{ key: string, value: any }>();
+
   mentors: Array<Mentor> = [];
 
   ngOnInit(): void {
     this.mentors = mentors;
+    this.validChange.emit(true);
+    this.stateChange.emit({
+      key: 'mentor_id',
+      value: this.mentors[0].id,
+    });
   }
 
   activeIndex = signal<number>(0);
 
   private startX = 0;
   private endX = 0;
-  private threshold = 50; // пикселей для свайпа
+  private threshold = 50;
 
   // Touch
   startTouch(event: TouchEvent) {
@@ -34,17 +42,6 @@ export class Mentors implements OnInit {
     this.handleSwipe();
   }
 
-  // Pointer (mouse/touch)
-  protected index: any;
-  onPointerDown(event: PointerEvent) {
-    this.startX = event.clientX;
-  }
-
-  onPointerUp(event: PointerEvent) {
-    this.endX = event.clientX;
-    this.handleSwipe();
-  }
-
   private handleSwipe() {
     const diff = this.endX - this.startX;
 
@@ -52,6 +49,8 @@ export class Mentors implements OnInit {
 
     if (diff > 0) this.prev();
     else this.next();
+
+    this.selectIndex();
   }
 
   next() {
@@ -66,7 +65,10 @@ export class Mentors implements OnInit {
     }
   }
 
-  selectIndex(index: number) {
-    this.activeIndex.set(index);
+  selectIndex() {
+    this.stateChange.emit({
+      key: 'mentor_id',
+      value: this.mentors[this.activeIndex()].id,
+    });
   }
 }

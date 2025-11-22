@@ -5,7 +5,7 @@ import {
   Output,
   QueryList,
   ViewChildren,
-  signal
+  signal, OnInit
 } from '@angular/core';
 
 @Component({
@@ -14,16 +14,23 @@ import {
   templateUrl: './passcode.html',
   styleUrl: './passcode.scss',
 })
-export class Passcode {
-  @Output() changed = new EventEmitter<string>();
-  @Output() completed = new EventEmitter<string>();
+export class Passcode implements OnInit {
+  @Output() validChange = new EventEmitter<boolean>();
+  @Output() stateChange = new EventEmitter<{ key: string, value: any }>();
 
-  pinLength = 4;
+  pinLength: number = 4;
   items = Array(this.pinLength).fill(0);
-
   values = signal<string[]>(Array(this.pinLength).fill(''));
 
   @ViewChildren('pin') inputs!: QueryList<ElementRef>;
+
+  ngOnInit() {
+    this.validChange.emit(true);
+  }
+
+  get isComplete(): boolean {
+    return this.values().every(v => v !== '');
+  }
 
   handleInput(event: any, index: number) {
     const value = event.target.value.replace(/\D/g, '').slice(0, 1);
@@ -32,15 +39,11 @@ export class Passcode {
     arr[index] = value;
     this.values.set(arr);
 
-    this.changed.emit(arr.join(''));
-
     if (value && index < this.pinLength - 1) {
       this.focus(index + 1);
     }
 
-    if (arr.every(v => v !== '')) {
-      this.completed.emit(arr.join(''));
-    }
+    this.emitState();
   }
 
   handleKeydown(event: KeyboardEvent, index: number) {
@@ -51,22 +54,32 @@ export class Passcode {
 
   handlePaste(event: ClipboardEvent) {
     event.preventDefault();
-    const text = (event.clipboardData?.getData('text') ?? '').replace(/\D/g, '');
 
+    const text = (event.clipboardData?.getData('text') ?? '').replace(/\D/g, '');
     const arr = Array(this.pinLength).fill('');
+
     for (let i = 0; i < this.pinLength; i++) {
       arr[i] = text[i] ?? '';
     }
+
     this.values.set(arr);
 
-    this.changed.emit(arr.join(''));
+    const focusIndex = Math.min(text.length, this.pinLength - 1);
+    this.focus(focusIndex);
 
-    if (arr.every(v => v !== '')) {
-      this.completed.emit(arr.join(''));
+    this.emitState();
+  }
+
+  emitState() {
+    const code = this.values().join('');
+
+    if (this.isComplete || !code.length) {
+      this.validChange.emit(true);
+    } else {
+      this.validChange.emit(false);
     }
 
-    const focusIndex = Math.min(text.length, this.pinLength - 1);
-    if (focusIndex >= 0) this.focus(focusIndex);
+    this.stateChange.emit({ key: 'passcode', value: code.length ? code : null });
   }
 
   focus(i: number) {
@@ -78,6 +91,8 @@ export class Passcode {
 
   clear() {
     this.values.set(Array(this.pinLength).fill(''));
+    this.validChange.emit(false);
+    this.stateChange.emit({ key: 'passcode', value: '' });
     this.focus(0);
   }
 }

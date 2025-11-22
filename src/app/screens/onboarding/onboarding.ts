@@ -10,6 +10,11 @@ import {LanguageLevels} from '@app/features/language-level/language-levels';
 import {Passcode} from '@app/features/passcode/passcode';
 import {Reminder} from '@app/features/reminder/reminder';
 
+export interface StepState {
+  valid: boolean;
+  data: { [key: string]: any } | null;
+}
+
 @Component({
   selector: 'app-onboarding',
   standalone: true,
@@ -22,7 +27,7 @@ import {Reminder} from '@app/features/reminder/reminder';
     Name,
     LanguageLevels,
     Passcode,
-    Reminder
+    Reminder,
   ],
   templateUrl: './onboarding.html',
   styleUrl: './onboarding.scss',
@@ -32,12 +37,17 @@ export class Onboarding implements OnInit {
   protected readonly img = img;
 
   step = signal<number>(0);
-  stepValid = signal<boolean>(true);
+  stepValid = signal<boolean>(false);
 
   totalSteps: number = 7;
   steps: Array<{
     id: number;
     status: string
+  }> = [];
+
+  stepStates: Array<{
+    key: string;
+    value: any;
   }> = [];
 
   ngOnInit(): void {
@@ -60,18 +70,19 @@ export class Onboarding implements OnInit {
     }
   }
 
-
   next(): void {
-    // greeting → go to step 1
+
     if (this.step() === 0) {
       this.step.set(1);
       this.recalcSteps();
+      this.stepValid.set(false);
       return;
     }
 
     if (this.step() < this.totalSteps) {
       this.step.update(v => v + 1);
       this.recalcSteps();
+      this.stepValid.set(false);
     }
   }
 
@@ -79,18 +90,23 @@ export class Onboarding implements OnInit {
     this.stepValid.set(val);
   }
 
-  isNextEnabled(): boolean {
-    if (!this.step()) {
+  onStepStateChange(data: { key: string; value: any }) {
+    this.stepStates[this.step()] = data;
+  }
+
+  // Возвращает true если кнопка должна быть ОТКЛЮЧЕНА
+  isNextDisabled(): boolean {
+    const stepsWithoutValidation = [0, 7];
+
+    if (stepsWithoutValidation.includes(this.step())) {
       return false;
     }
+
     return !this.stepValid();
   }
 
-  subscribe(): boolean {
-    if (!this.step()) {
-      return false;
-    }
-    return !this.stepValid();
+  subscribe(): void {
+    console.log(this.stepStates);
   }
 
   private recalcSteps(): void {
@@ -98,7 +114,5 @@ export class Onboarding implements OnInit {
       ...step,
       status: (this.step() >= step.id) ? 'active' : 'inactive'
     }));
-
   }
-
 }

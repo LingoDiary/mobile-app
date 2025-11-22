@@ -1,4 +1,4 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, signal} from '@angular/core';
 import {nativeLanguages} from '@app/data/native-languages';
 import {NativeLanguage} from '@app/data/interfaces/NativeLanguage';
 
@@ -10,6 +10,9 @@ import {NativeLanguage} from '@app/data/interfaces/NativeLanguage';
 })
 export class NativeLanguages implements OnInit {
 
+  @Output() validChange = new EventEmitter<boolean>();
+  @Output() stateChange = new EventEmitter<{ key: string, value: any }>();
+
   nativeLanguages: Array<NativeLanguage> = [];
 
   ngOnInit(): void {
@@ -20,8 +23,11 @@ export class NativeLanguages implements OnInit {
 
   setNativeLanguage(id: number): void {
     this.selectedNativeLanguageId.set(id);
-    // если нужно, можно прописать в FormControl или в storage
-    // this.form.patchValue({ native_language_id: id });
+    this.validChange.emit(true);
+    this.stateChange.emit({
+      key: 'native_language_id',
+      value: id,
+    });
   }
 
 }

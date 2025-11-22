@@ -1,4 +1,4 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, signal} from '@angular/core';
 import {languageLevels} from '@app/data/language-levels';
 import {LanguageLevel} from '@app/data/interfaces/LanguageLevel';
 
@@ -9,6 +9,10 @@ import {LanguageLevel} from '@app/data/interfaces/LanguageLevel';
   styleUrl: './language-levels.scss',
 })
 export class LanguageLevels implements OnInit {
+
+  @Output() validChange = new EventEmitter<boolean>();
+  @Output() stateChange = new EventEmitter<{ key: string, value: any }>();
+
   languageLevels: Array<LanguageLevel> = [];
 
   ngOnInit(): void {
@@ -19,8 +23,11 @@ export class LanguageLevels implements OnInit {
 
   set(id: number): void {
     this.selectedId.set(id);
-    // если нужно, можно прописать в FormControl или в storage
-    // this.form.patchValue({ native_language_id: id });
+    this.validChange.emit(true);
+    this.stateChange.emit({
+      key: 'language_level_id',
+      value: id,
+    });
   }
 
 }

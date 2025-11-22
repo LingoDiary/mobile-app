@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-reminder',
@@ -6,24 +6,46 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './reminder.html',
   styleUrl: './reminder.scss',
 })
-export class Reminder {
+export class Reminder implements OnInit {
+
+  @Output() validChange = new EventEmitter<boolean>();
+  @Output() stateChange = new EventEmitter<{ key: string, value: any }>();
 
   @Input() hour: string = '';
   @Input() minute: string = '';
 
-  @Output() hourChange = new EventEmitter<string>();
-  @Output() minuteChange = new EventEmitter<string>();
-
   hours = Array(24).fill(0);
   minutes = Array(12).fill(0);
 
+  ngOnInit() {
+    this.validChange.emit(true);
+  }
+
   onHourChange(event: any) {
     this.hour = event.target.value;
-    this.hourChange.emit(this.hour);
+    this.emitState();
+
   }
 
   onMinuteChange(event: any) {
     this.minute = event.target.value;
-    this.minuteChange.emit(this.minute);
+    this.emitState();
+  }
+
+  emitState(): void {
+    if ((this.hour.length && !this.minute.length) || (!this.hour.length && this.minute.length)) {
+      this.validChange.emit(false);
+    } else if (!this.hour.length && !this.minute.length) {
+      this.validChange.emit(true);
+    } else {
+      this.validChange.emit(true);
+      this.stateChange.emit({
+        key: 'reminder',
+        value:{
+          hour: this.hour,
+          minute: this.minute
+        }
+      })
+    }
   }
 }
