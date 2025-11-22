@@ -1,13 +1,32 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component, inject, signal, OnInit} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
 import {Viewport} from './components/viewport/viewport';
+import {UserRepository} from '../core/storage/user.storage';
+import {User} from '../core/db/db-tables';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, Viewport],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  protected readonly title = signal('app');
+export class App implements OnInit {
+  protected readonly title = signal('Lingo Diary');
+
+  private readonly userRepository = inject(UserRepository);
+  private readonly router = inject(Router);
+
+  constructor() {
+  }
+
+  async ngOnInit() {
+    const user: User | null = await this.userRepository.user();
+
+    if (user?.isOnboarded) {
+      await this.router.navigate(['/diary']);
+    } else {
+      await this.router.navigate(['/onboarding']);
+    }
+  }
 }

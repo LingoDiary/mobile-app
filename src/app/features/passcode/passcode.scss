@@ -2,15 +2,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
   gap: 0.75rem;
-
   width: 100%;
   max-width: 22rem;
-  padding: 2rem 0;
   margin: 0 auto;
 
   &__input {
     height: 3.5rem;
     text-align: center;
+    -webkit-text-security: disc;
 
     border-radius: 0.75rem;
     border: 1.5px solid var(--border-color);

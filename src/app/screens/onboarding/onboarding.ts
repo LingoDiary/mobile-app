@@ -11,6 +11,7 @@ import {Passcode} from '@app/features/passcode/passcode';
 import {Reminder} from '@app/features/reminder/reminder';
 import {UserDTO} from '../../../core/dto/user.dto';
 import {UserRepository} from '../../../core/storage/user.storage';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -33,6 +34,7 @@ import {UserRepository} from '../../../core/storage/user.storage';
 export class Onboarding implements OnInit {
 
   private readonly userRepository: UserRepository = inject(UserRepository);
+  private readonly router: Router = inject(Router);
 
   protected readonly img = img;
 
@@ -128,9 +130,8 @@ export class Onboarding implements OnInit {
       updatedAt: null,
     };
 
-    const result = await this.userRepository.create(user);
-    console.log(result);
-
+    await this.userRepository.createOrUpdate(user);
+    await this.router.navigate(['/diary']);
   }
 
   private recalcSteps(): void {

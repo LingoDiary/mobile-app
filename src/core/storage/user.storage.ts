@@ -6,18 +6,14 @@ import {User} from '../db/db-tables';
 @Injectable({ providedIn: 'root' })
 export class UserRepository {
 
-  private readonly userId: number = 1;
+  private readonly USER_ID: number = 1;
 
-  async create(user: UserDTO): Promise<number> {
-    const entry: User | null = await this.user();
-    if (entry) {
-      return this.userId;
-    }
-    return db.users.add(user);
+  async createOrUpdate(user: UserDTO): Promise<void> {
+    await db.users.put({ ...user, id: this.USER_ID });
   }
 
   async user(): Promise<User | null> {
-    return await db.users.get(this.userId) ?? null;
+    return await db.users.get(this.USER_ID) ?? null;
   }
 
 }

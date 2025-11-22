@@ -3,8 +3,9 @@
     <input
       #pin
       class="passcode__input"
-      type="password"
-      inputmode="decimal"
+      type="tel"
+      inputmode="numeric"
+      pattern="[0-9]*"
       autocomplete="one-time-code"
       maxlength="1"
       [value]="values()[$index]"
