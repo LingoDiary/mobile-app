@@ -4,7 +4,7 @@ import {Button} from '@app/components/ui/button/button';
 import {img} from '@app/shared/utils/helpers';
 import {Router} from '@angular/router';
 import {Name as NameFeature} from '@app/features/name/name'
-import {UserRepository} from '../../../../core/storage/user.storage';
+import {UserRepository} from '@core/storage/user.storage';
 import {AlertService} from '@app/core/services/alert/alert';
 
 @Component({

@@ -1,0 +1,35 @@
+<app-content>
+  <div wrapper>
+
+    <div class="screen__back">
+      <app-button (click)="back()" type="link">
+        <img [src]="img('icons/arrow-left.svg')" alt="back">
+      </app-button>
+    </div>
+
+    <div class="screen__heading">Passcode</div>
+
+    <app-passcode
+      (validChange)="onValidChange($event)"
+      (stateChange)="onStateChange($event)"
+    />
+  </div>
+
+  <div action>
+    @if (isPasscodeEntered()) {
+      <app-button
+        (click)="onSave()"
+        extraClass="full-width"
+        [disabled]="!isValid()">
+        Save
+      </app-button>
+    } @else {
+      <app-button
+        (click)="onDrop()"
+        extraClass="full-width"
+        [disabled]="!isValid()">
+        Drop
+      </app-button>
+    }
+  </div>
+</app-content>

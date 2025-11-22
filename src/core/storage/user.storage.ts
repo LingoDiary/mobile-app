@@ -27,4 +27,8 @@ export class UserRepository {
   async updateName(name: string): Promise<void> {
     await db.users.update(this.USER_ID, { name });
   }
+
+  async updatePasscode(passcode: string | null): Promise<void> {
+    await db.users.update(this.USER_ID, { passcode });
+  }
 }

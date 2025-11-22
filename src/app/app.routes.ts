@@ -25,4 +25,8 @@ export const routes: Routes = [
     path: 'profile/name',
     loadComponent: () => import('app/screens/profile/name/name').then(m => m.Name),
   },
+  {
+    path: 'profile/passcode',
+    loadComponent: () => import('app/screens/profile/passcode/passcode').then(m => m.Passcode),
+  },
 ];

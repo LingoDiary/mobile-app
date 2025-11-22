@@ -9,8 +9,8 @@ import {Name} from '@app/features/name/name';
 import {LanguageLevels} from '@app/features/language-level/language-levels';
 import {Passcode} from '@app/features/passcode/passcode';
 import {Reminder} from '@app/features/reminder/reminder';
-import {UserDTO} from '../../../core/dto/user.dto';
-import {UserRepository} from '../../../core/storage/user.storage';
+import {UserDTO} from '@core/dto/user.dto';
+import {UserRepository} from '@core/storage/user.storage';
 import {Router} from '@angular/router';
 
 
