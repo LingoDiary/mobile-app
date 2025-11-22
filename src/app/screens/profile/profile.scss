@@ -1,0 +1,35 @@
+.menu {
+  display: grid;
+
+  &__group {
+    &-heading {
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.5rem 0;
+    }
+    &-list {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__item {
+    font-family: var(--text-font), sans-serif;
+    font-size: 1rem;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1rem 1fr;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--text-font);
+    padding: 1rem 0;
+    border: none;
+    white-space: nowrap;
+    text-align: left;
+    cursor: pointer;
+    background: none;
+    outline: none;
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--gray);
+    }
+  }
+}
