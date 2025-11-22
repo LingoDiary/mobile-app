@@ -3,7 +3,7 @@
   outline: none;
   box-shadow: none;
   border: 1px solid;
-  padding: 1.6rem 1rem;
+  padding: 1rem;
   border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 600;
@@ -12,7 +12,6 @@
   display: block;
   font-size: 1rem;
   font-family: var(--text-font), sans-serif;
-  line-height: 0;
 
   &-default {
     background: var(--black);

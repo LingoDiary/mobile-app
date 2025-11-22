@@ -19,7 +19,8 @@ import {AlertService} from '@app/core/services/alert/alert';
 })
 export class Name implements OnInit {
 
-  value = signal<string|null>(null)
+  value = signal<string|null>(null);
+  isValid = signal<boolean>(true);
 
   private readonly router: Router = inject(Router);
   private readonly userRepository: UserRepository = inject(UserRepository);
@@ -30,10 +31,15 @@ export class Name implements OnInit {
   async ngOnInit() {
     const name: string | null = await this.userRepository.getName();
     this.value.set(name);
+    if (name) this.isValid.set(true);
   }
 
   back(): void {
     this.router.navigate(['/profile']);
+  }
+
+  onValidChange(val: boolean) {
+    this.isValid.set(val);
   }
 
   onStateChange(data: { key: string; value: any }) {

@@ -10,11 +10,12 @@
     </div>
     <app-name
       [value]="value()"
+      (validChange)="onValidChange($event)"
       (stateChange)="onStateChange($event)"
     />
   </div>
   <div action>
-    <app-button (click)="onSave()" [extraClass]="'full-width'" [disabled]="!value()?.length">
+    <app-button (click)="onSave()" [extraClass]="'full-width'" [disabled]="!isValid()">
       Save
     </app-button>
   </div>
