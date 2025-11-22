@@ -3,11 +3,12 @@ import {Router, RouterOutlet} from '@angular/router';
 import {Viewport} from '@app/components/core/viewport/viewport';
 import {UserRepository} from '../core/storage/user.storage';
 import {User} from '../core/db/db-tables';
+import {Alert} from '@app/components/ui/alert/alert';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Viewport],
+  imports: [RouterOutlet, Viewport, Alert],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

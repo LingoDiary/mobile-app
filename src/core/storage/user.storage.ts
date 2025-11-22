@@ -16,4 +16,15 @@ export class UserRepository {
     return await db.users.get(this.USER_ID) ?? null;
   }
 
+  async getName(): Promise<string | null> {
+    const user: User | null = await db.users.get(this.USER_ID) ?? null;
+    if (user) {
+      return user.name;
+    }
+    return null;
+  }
+
+  async updateName(name: string): Promise<void> {
+    await db.users.update(this.USER_ID, { name });
+  }
 }

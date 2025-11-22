@@ -1,0 +1,21 @@
+<app-content>
+  <div wrapper>
+    <div class="screen__back">
+      <app-button (click)="back()" [type]="'link'">
+        <img [src]="img('icons/arrow-left.svg')" alt="arrow-left.svg">
+      </app-button>
+    </div>
+    <div class="screen__heading">
+      Name
+    </div>
+    <app-name
+      [value]="value()"
+      (stateChange)="onStateChange($event)"
+    />
+  </div>
+  <div action>
+    <app-button (click)="onSave()" [extraClass]="'full-width'" [disabled]="!value()?.length">
+      Save
+    </app-button>
+  </div>
+</app-content>

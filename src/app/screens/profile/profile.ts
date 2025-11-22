@@ -3,6 +3,7 @@ import {Content} from "@app/components/core/content/content";
 import {Navigation} from "@app/components/ui/navigation/navigation";
 import {FontAwesomeModule, IconDefinition} from '@fortawesome/angular-fontawesome';
 import {faPencil, faLock, faUserTie, faLanguage, faArrowUpWideShort, faMoneyBill, faBell, faHeadset} from '@fortawesome/free-solid-svg-icons';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +11,8 @@ import {faPencil, faLock, faUserTie, faLanguage, faArrowUpWideShort, faMoneyBill
   imports: [
     Content,
     Navigation,
-    FontAwesomeModule
+    FontAwesomeModule,
+    RouterLink
   ],
   templateUrl: './profile.html',
   styleUrl: './profile.scss',

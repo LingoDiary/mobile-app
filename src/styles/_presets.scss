@@ -24,6 +24,10 @@ textarea {
 
 .screen {
 
+  &__back {
+    margin: 0 -1rem;
+  }
+
   &__heading {
     font-size: 2rem;
     font-weight: 800;
@@ -37,6 +41,7 @@ textarea {
     right: 1.5rem;
     z-index: 3;
     .btn {
+      padding: 1rem !important;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19) !important;
     }
   }
