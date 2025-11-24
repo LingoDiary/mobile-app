@@ -37,4 +37,8 @@ export const routes: Routes = [
     path: 'profile/native-language',
     loadComponent: () => import('app/screens/profile/native-language/native-language').then(m => m.NativeLanguage),
   },
+  {
+    path: 'profile/language-level',
+    loadComponent: () => import('app/screens/profile/language-level/language-level').then(m => m.LanguageLevel),
+  },
 ];

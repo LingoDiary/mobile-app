@@ -1,0 +1,19 @@
+<app-content>
+  <div wrapper>
+    <app-back [url]="'/profile'" />
+    <div class="screen__heading">Language Levels</div>
+    <app-language-levels
+      [id]="value()"
+      (validChange)="onValidChange($event)"
+      (stateChange)="onStateChange($event)"
+    />
+  </div>
+  <div action>
+    <app-button
+      (click)="onSave()"
+      extraClass="full-width"
+      [disabled]="!isValid()">
+      Save
+    </app-button>
+  </div>
+</app-content>

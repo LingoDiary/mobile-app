@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, signal} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, signal, SimpleChanges} from '@angular/core';
 import {languageLevels} from '@core/data/language-levels';
 import {LanguageLevel} from '@core/data/interfaces/LanguageLevel';
 
@@ -8,15 +8,21 @@ import {LanguageLevel} from '@core/data/interfaces/LanguageLevel';
   templateUrl: './language-levels.html',
   styleUrl: './language-levels.scss',
 })
-export class LanguageLevels implements OnInit {
+export class LanguageLevels implements OnInit, OnChanges {
 
   @Output() validChange = new EventEmitter<boolean>();
   @Output() stateChange = new EventEmitter<{ key: string, value: any }>();
+
+  @Input() id: number | null = null;
 
   languageLevels: Array<LanguageLevel> = [];
 
   ngOnInit(): void {
     this.languageLevels = languageLevels;
+  }
+
+  ngOnChanges() {
+    if (this.id) this.set(this.id);
   }
 
   selectedId = signal<number | null>(null);

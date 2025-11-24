@@ -1,4 +1,4 @@
-
+import {Reminder} from '@core/type/reminder';
 
 export interface UserDTO {
   name: string;
@@ -6,7 +6,7 @@ export interface UserDTO {
   nativeLanguageId: number;
   languageLevelId: number;
   passcode: string | null;
-  reminder: { hour: string, minutes: string} | null,
+  reminder: Reminder | null,
   isOnboarded: boolean;
   isTutorialCompleted: boolean;
   createdAt: string;

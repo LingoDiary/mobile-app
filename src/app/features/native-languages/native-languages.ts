@@ -22,9 +22,7 @@ export class NativeLanguages implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    if (this.id) {
-      this.setNativeLanguage(this.id);
-    }
+    if (this.id) this.setNativeLanguage(this.id);
   }
 
   selectedNativeLanguageId = signal<number | null>(null);
