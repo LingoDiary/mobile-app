@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Content} from "@app/components/core/content/content";
+import {Content} from "@app/components/grid/content/content";
 import {Navigation} from '@app/components/ui/navigation/navigation';
 import {Button} from '@app/components/ui/button/button';
 import {img} from '@app/shared/utils/helpers';

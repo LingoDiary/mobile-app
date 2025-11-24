@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Content} from "@app/components/core/content/content";
+import {Content} from "@app/components/grid/content/content";
 import {Navigation} from "@app/components/ui/navigation/navigation";
 import {FontAwesomeModule, IconDefinition} from '@fortawesome/angular-fontawesome';
 import {faPencil, faLock, faUserTie, faLanguage, faArrowUpWideShort, faMoneyBill, faBell, faHeadset} from '@fortawesome/free-solid-svg-icons';

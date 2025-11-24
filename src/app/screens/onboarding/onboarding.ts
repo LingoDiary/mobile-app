@@ -1,6 +1,6 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {img} from '@app/shared/utils/helpers';
-import {Content} from '@app/components/core/content/content';
+import {Content} from '@app/components/grid/content/content';
 import {Button} from '@app/components/ui/button/button';
 import {Mentors} from '@app/features/mentors/mentors';
 import {NgClass} from '@angular/common';

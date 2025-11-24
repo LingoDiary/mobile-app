@@ -24,7 +24,7 @@ export class Passcode implements OnInit {
 
   @ViewChildren('pin') inputs!: QueryList<ElementRef>;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.validChange.emit(true);
   }
 
@@ -73,13 +73,20 @@ export class Passcode implements OnInit {
   emitState() {
     const code = this.values().join('');
 
-    if (this.isComplete || !code.length) {
+    if (this.isComplete) {
       this.validChange.emit(true);
-    } else {
-      this.validChange.emit(false);
+      this.stateChange.emit({ key: 'passcode', value: code });
+
+      return;
     }
 
-    this.stateChange.emit({ key: 'passcode', value: code.length ? code : null });
+    if (!code.length) {
+      this.validChange.emit(true);
+      this.stateChange.emit({ key: 'passcode', value: null });
+      return;
+    }
+
+    this.validChange.emit(false);
   }
 
   focus(i: number) {
@@ -91,8 +98,5 @@ export class Passcode implements OnInit {
 
   clear() {
     this.values.set(Array(this.pinLength).fill(''));
-    this.validChange.emit(false);
-    this.stateChange.emit({ key: 'passcode', value: '' });
-    this.focus(0);
   }
 }

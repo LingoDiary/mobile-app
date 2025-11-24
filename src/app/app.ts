@@ -1,6 +1,6 @@
 import {Component, inject, signal, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {Viewport} from '@app/components/core/viewport/viewport';
+import {Viewport} from '@app/components/grid/viewport/viewport';
 import {UserRepository} from '@core/storage/user.storage';
 import {User} from '@core/db/db-tables';
 import {Alert} from '@app/components/ui/alert/alert';

@@ -1,47 +1,36 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, inject, computed, ViewChild} from '@angular/core';
 import { Button } from '@app/components/ui/button/button';
-import { Content } from '@app/components/core/content/content';
+import { Content } from '@app/components/grid/content/content';
 import { Passcode as PasscodeFeature } from '@app/features/passcode/passcode';
 import { AlertService } from '@app/core/services/alert/alert';
 import { img } from '@app/shared/utils/helpers';
 import {UserRepository} from '@core/storage/user.storage';
+import {Back} from '@app/components/ui/back/back';
+import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
 
 @Component({
   selector: 'app-profile-passcode',
   standalone: true,
-  imports: [Button, Content, PasscodeFeature],
+  imports: [Button, Content, PasscodeFeature, Back],
   templateUrl: './passcode.html',
   styleUrl: './passcode.scss',
 })
-export class Passcode {
+export class Passcode extends NestedChildActions {
 
-  value = signal<string | null>(null);
-  isValid = signal<boolean>(false);
+  @ViewChild(PasscodeFeature) passcode!: PasscodeFeature;
 
   protected readonly img = img;
 
-  private readonly router: Router = inject(Router);
   private readonly userRepository: UserRepository = inject(UserRepository);
   private readonly alert: AlertService = inject(AlertService);
 
   isPasscodeEntered = computed(() => !!this.value()?.length);
 
-  back(): void {
-    this.router.navigate(['/profile']);
-  }
-
-  onValidChange(valid: boolean): void {
-    this.isValid.set(valid);
-  }
-
-  onStateChange(data: { key: string; value: any }): void {
-    this.value.set(data.value ?? null);
-  }
-
   onSave(): void {
     this.userRepository.updatePasscode(this.value());
     this.alert.show('Successfully saved', 'success');
+    this.passcode.clear();
+    this.value.set(null);
   }
 
   onDrop(): void {
