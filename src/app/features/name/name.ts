@@ -13,7 +13,7 @@ export class Name implements OnInit, OnChanges {
   @Output() validChange = new EventEmitter<boolean>();
   @Output() stateChange = new EventEmitter<{ key: string, value: any }>();
 
-  @Input() value: string | null = null;
+  @Input() inputValue: string | null = null;
 
   name = new FormControl('');
 
@@ -39,8 +39,6 @@ export class Name implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.value) {
-      this.name.setValue(this.value, { emitEvent: false });
-    }
+    if (this.inputValue)  this.name.setValue(this.inputValue, { emitEvent: false });
   }
 }

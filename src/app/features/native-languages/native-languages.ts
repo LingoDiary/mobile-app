@@ -13,7 +13,7 @@ export class NativeLanguages implements OnInit, OnChanges {
   @Output() validChange = new EventEmitter<boolean>();
   @Output() stateChange = new EventEmitter<{ key: string, value: any }>();
 
-  @Input() id: number | null = null;
+  @Input() inputValue: number | null = null;
 
   nativeLanguages: Array<NativeLanguage> = [];
 
@@ -22,7 +22,7 @@ export class NativeLanguages implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    if (this.id) this.setNativeLanguage(this.id);
+    if (this.inputValue) this.setNativeLanguage(this.inputValue);
   }
 
   selectedNativeLanguageId = signal<number | null>(null);

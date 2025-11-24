@@ -6,9 +6,10 @@ import {UserRepository} from '@core/storage/user.storage';
 import {AlertService} from '@app/core/services/alert/alert';
 import {Back} from '@app/components/ui/back/back';
 import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
+import {DiaryScreen} from '@app/screens/diary/diary';
 
 @Component({
-  selector: 'app-profile-name',
+  selector: 'app-name-screen',
   imports: [
     Content,
     Button,
@@ -18,7 +19,7 @@ import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
   templateUrl: './name.html',
   styleUrl: './name.scss',
 })
-export class Name extends NestedChildActions implements OnInit {
+export class NameScreen extends NestedChildActions implements OnInit {
 
   private readonly userRepository: UserRepository = inject(UserRepository);
   private readonly alert: AlertService = inject(AlertService);

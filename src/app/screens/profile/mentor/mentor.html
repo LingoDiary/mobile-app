@@ -3,7 +3,7 @@
     <app-back [url]="'/profile'" />
     <div class="screen__heading">Mentor</div>
     <app-mentors
-      [value]="value()"
+      [inputValue]="value()"
       (validChange)="onValidChange($event)"
       (stateChange)="onStateChange($event)"
     />

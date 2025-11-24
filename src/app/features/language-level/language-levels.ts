@@ -13,7 +13,7 @@ export class LanguageLevels implements OnInit, OnChanges {
   @Output() validChange = new EventEmitter<boolean>();
   @Output() stateChange = new EventEmitter<{ key: string, value: any }>();
 
-  @Input() id: number | null = null;
+  @Input() inputValue: number | null = null;
 
   languageLevels: Array<LanguageLevel> = [];
 
@@ -22,7 +22,7 @@ export class LanguageLevels implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.id) this.set(this.id);
+    if (this.inputValue) this.set(this.inputValue);
   }
 
   selectedId = signal<number | null>(null);

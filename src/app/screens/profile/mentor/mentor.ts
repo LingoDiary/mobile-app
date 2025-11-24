@@ -6,9 +6,10 @@ import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
 import {Mentors} from '@app/features/mentors/mentors';
 import {UserRepository} from '@core/storage/user.storage';
 import {AlertService} from '@app/core/services/alert/alert';
+import {DiaryScreen} from '@app/screens/diary/diary';
 
 @Component({
-  selector: 'app-mentor',
+  selector: 'app-mentor-screen',
   imports: [
     Back,
     Button,
@@ -18,7 +19,7 @@ import {AlertService} from '@app/core/services/alert/alert';
   templateUrl: './mentor.html',
   styleUrl: './mentor.scss',
 })
-export class Mentor extends NestedChildActions implements OnInit {
+export class MentorScreen extends NestedChildActions implements OnInit {
 
   private readonly userRepository: UserRepository = inject(UserRepository);
   private readonly alert: AlertService = inject(AlertService);

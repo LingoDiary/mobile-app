@@ -3,7 +3,7 @@
     <app-back [url]="'/profile'" />
     <div class="screen__heading">Language Levels</div>
     <app-language-levels
-      [id]="value()"
+      [inputValue]="value()"
       (validChange)="onValidChange($event)"
       (stateChange)="onStateChange($event)"
     />

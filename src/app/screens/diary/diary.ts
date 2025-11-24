@@ -5,7 +5,7 @@ import {Button} from '@app/components/ui/button/button';
 import {img} from '@app/shared/utils/helpers';
 
 @Component({
-  selector: 'app-diary',
+  selector: 'app-diary-screen',
   imports: [
     Content,
     Navigation,
@@ -14,7 +14,7 @@ import {img} from '@app/shared/utils/helpers';
   templateUrl: './diary.html',
   styleUrl: './diary.scss',
 })
-export class Diary {
+export class DiaryScreen {
 
   protected readonly img = img;
 }

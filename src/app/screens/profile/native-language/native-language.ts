@@ -6,9 +6,10 @@ import {Content} from '@app/components/grid/content/content';
 import {UserRepository} from '@core/storage/user.storage';
 import {AlertService} from '@app/core/services/alert/alert';
 import {NativeLanguages} from '@app/features/native-languages/native-languages';
+import {DiaryScreen} from '@app/screens/diary/diary';
 
 @Component({
-  selector: 'app-native-language',
+  selector: 'app-native-language-screen',
   imports: [
     Back,
     Button,
@@ -18,7 +19,7 @@ import {NativeLanguages} from '@app/features/native-languages/native-languages';
   templateUrl: './native-language.html',
   styleUrl: './native-language.scss',
 })
-export class NativeLanguage extends NestedChildActions implements OnInit {
+export class NativeLanguageScreen extends NestedChildActions implements OnInit {
 
   private readonly userRepository: UserRepository = inject(UserRepository);
   private readonly alert: AlertService = inject(AlertService);

@@ -7,42 +7,42 @@ export const routes: Routes = [
   },
   {
     path: 'diary',
-    loadComponent: () => import('app/screens/diary/diary').then(m => m.Diary),
+    loadComponent: () => import('app/screens/diary/diary').then(m => m.DiaryScreen),
   },
   {
     path: 'calender',
-    loadComponent: () => import('@app/screens/calendar/calendar').then(m => m.Calendar),
+    loadComponent: () => import('@app/screens/calendar/calendar').then(m => m.CalendarScreen),
   },
   {
     path: 'dictionary',
-    loadComponent: () => import('app/screens/dictionary/dictionary').then(m => m.Dictionary),
+    loadComponent: () => import('app/screens/dictionary/dictionary').then(m => m.DictionaryScreen),
   },
   {
     path: 'profile',
-    loadComponent: () => import('app/screens/profile/profile').then(m => m.Profile),
+    loadComponent: () => import('app/screens/profile/profile').then(m => m.ProfileScreen),
   },
   {
     path: 'profile/name',
-    loadComponent: () => import('app/screens/profile/name/name').then(m => m.Name),
+    loadComponent: () => import('app/screens/profile/name/name').then(m => m.NameScreen),
   },
   {
     path: 'profile/passcode',
-    loadComponent: () => import('app/screens/profile/passcode/passcode').then(m => m.Passcode),
+    loadComponent: () => import('app/screens/profile/passcode/passcode').then(m => m.PasscodeScreen),
   },
   {
     path: 'profile/mentor',
-    loadComponent: () => import('app/screens/profile/mentor/mentor').then(m => m.Mentor),
+    loadComponent: () => import('app/screens/profile/mentor/mentor').then(m => m.MentorScreen),
   },
   {
     path: 'profile/native-language',
-    loadComponent: () => import('app/screens/profile/native-language/native-language').then(m => m.NativeLanguage),
+    loadComponent: () => import('app/screens/profile/native-language/native-language').then(m => m.NativeLanguageScreen),
   },
   {
     path: 'profile/language-level',
-    loadComponent: () => import('app/screens/profile/language-level/language-level').then(m => m.LanguageLevel),
+    loadComponent: () => import('app/screens/profile/language-level/language-level').then(m => m.LanguageLevelScreen),
   },
   {
     path: 'profile/reminder',
-    loadComponent: () => import('app/screens/profile/reminder/reminder').then(m => m.Reminder),
+    loadComponent: () => import('app/screens/profile/reminder/reminder').then(m => m.ReminderScreen),
   },
 ];

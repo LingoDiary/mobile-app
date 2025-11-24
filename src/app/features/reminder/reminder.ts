@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angula
 import {HoursTimes} from '@core/type/hours-times';
 
 @Component({
-  selector: 'app-reminder-feature',
+  selector: 'app-reminder',
   standalone: true,
   templateUrl: './reminder.html',
   styleUrl: './reminder.scss',

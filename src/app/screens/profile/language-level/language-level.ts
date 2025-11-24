@@ -6,9 +6,10 @@ import {Back} from '@app/components/ui/back/back';
 import {Button} from '@app/components/ui/button/button';
 import {Content} from '@app/components/grid/content/content';
 import {LanguageLevels} from '@app/features/language-level/language-levels';
+import {DiaryScreen} from '@app/screens/diary/diary';
 
 @Component({
-  selector: 'app-language-level',
+  selector: 'app-language-level-screen',
   imports: [
     Back,
     Button,
@@ -18,7 +19,7 @@ import {LanguageLevels} from '@app/features/language-level/language-levels';
   templateUrl: './language-level.html',
   styleUrl: './language-level.scss',
 })
-export class LanguageLevel extends NestedChildActions implements OnInit {
+export class LanguageLevelScreen extends NestedChildActions implements OnInit {
 
   private readonly userRepository: UserRepository = inject(UserRepository);
   private readonly alert: AlertService = inject(AlertService);

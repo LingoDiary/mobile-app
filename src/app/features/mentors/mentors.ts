@@ -15,7 +15,7 @@ export class Mentors implements OnInit, OnChanges {
   @Output() validChange = new EventEmitter<boolean>();
   @Output() stateChange = new EventEmitter<{ key: string, value: any }>();
 
-  @Input() value: number | null = null;
+  @Input() inputValue: number | null = null;
 
   mentors: Array<Mentor> = [];
   activeIndex = signal<number>(0);
@@ -23,7 +23,7 @@ export class Mentors implements OnInit, OnChanges {
   ngOnInit(): void {
     this.mentors = mentors;
 
-    const index = this.value ? this.value - 1 : 0;
+    const index = this.inputValue ? this.inputValue - 1 : 0;
     this.activeIndex.set(index);
 
     this.validChange.emit(true);
@@ -34,9 +34,7 @@ export class Mentors implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    if (this.value !== null) {
-      this.activeIndex.set(this.value - 1);
-    }
+    if (this.inputValue) this.activeIndex.set(this.inputValue - 1);
   }
 
   private startX = 0;

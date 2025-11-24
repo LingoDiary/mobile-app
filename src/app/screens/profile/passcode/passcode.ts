@@ -7,15 +7,16 @@ import { img } from '@app/shared/utils/helpers';
 import {UserRepository} from '@core/storage/user.storage';
 import {Back} from '@app/components/ui/back/back';
 import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
+import {DiaryScreen} from '@app/screens/diary/diary';
 
 @Component({
-  selector: 'app-profile-passcode',
+  selector: 'app-passcode-screen',
   standalone: true,
   imports: [Button, Content, PasscodeFeature, Back],
   templateUrl: './passcode.html',
   styleUrl: './passcode.scss',
 })
-export class Passcode extends NestedChildActions {
+export class PasscodeScreen extends NestedChildActions {
 
   @ViewChild(PasscodeFeature) passcode!: PasscodeFeature;
 

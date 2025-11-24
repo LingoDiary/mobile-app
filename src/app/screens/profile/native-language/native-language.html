@@ -3,7 +3,7 @@
     <app-back [url]="'/profile'" />
     <div class="screen__heading">Native Language</div>
     <app-native-languages
-      [id]="value()"
+      [inputValue]="value()"
       (validChange)="onValidChange($event)"
       (stateChange)="onStateChange($event)"
     />

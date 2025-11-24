@@ -15,7 +15,7 @@ import {Router} from '@angular/router';
 
 
 @Component({
-  selector: 'app-onboarding',
+  selector: 'app-onboarding-screen',
   standalone: true,
   imports: [
     Content,

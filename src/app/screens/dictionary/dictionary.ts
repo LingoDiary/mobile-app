@@ -5,7 +5,7 @@ import {Navigation} from "@app/components/ui/navigation/navigation";
 import {img} from '@app/shared/utils/helpers';
 
 @Component({
-  selector: 'app-dictionary',
+  selector: 'app-dictionary-screen',
     imports: [
         Button,
         Content,
@@ -14,7 +14,7 @@ import {img} from '@app/shared/utils/helpers';
   templateUrl: './dictionary.html',
   styleUrl: './dictionary.scss',
 })
-export class Dictionary {
+export class DictionaryScreen {
 
   protected readonly img = img;
 }

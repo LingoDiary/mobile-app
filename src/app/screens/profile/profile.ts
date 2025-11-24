@@ -6,7 +6,7 @@ import {faPencil, faLock, faUserTie, faLanguage, faArrowUpWideShort, faMoneyBill
 import {RouterLink} from '@angular/router';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-profile-screen',
   standalone: true,
   imports: [
     Content,
@@ -17,7 +17,7 @@ import {RouterLink} from '@angular/router';
   templateUrl: './profile.html',
   styleUrl: './profile.scss',
 })
-export class Profile {
+export class ProfileScreen {
   faPencil: IconDefinition = faPencil;
   faLock: IconDefinition = faLock;
   faUserTie: IconDefinition = faUserTie;

@@ -9,7 +9,7 @@ import {Content} from '@app/components/grid/content/content';
 import {Reminder as ReminderFeature} from '@app/features/reminder/reminder';
 
 @Component({
-  selector: 'app-reminder',
+  selector: 'app-reminder-screen',
   imports: [
     Back,
     Button,
@@ -19,7 +19,7 @@ import {Reminder as ReminderFeature} from '@app/features/reminder/reminder';
   templateUrl: './reminder.html',
   styleUrl: './reminder.scss',
 })
-export class Reminder extends NestedChildActions implements OnInit {
+export class ReminderScreen extends NestedChildActions implements OnInit {
 
   private readonly userRepository: UserRepository = inject(UserRepository);
   private readonly alert: AlertService = inject(AlertService);
