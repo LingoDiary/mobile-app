@@ -121,7 +121,7 @@ export class Onboarding implements OnInit {
       reminder: dataMap['reminder']
         ? {
           hour: dataMap['reminder'].hour.toString(),
-          minutes: dataMap['reminder'].minute.toString(),
+          minute: dataMap['reminder'].minute.toString(),
         }
         : null,
       isOnboarded: true,

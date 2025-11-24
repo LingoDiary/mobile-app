@@ -41,4 +41,8 @@ export const routes: Routes = [
     path: 'profile/language-level',
     loadComponent: () => import('app/screens/profile/language-level/language-level').then(m => m.LanguageLevel),
   },
+  {
+    path: 'profile/reminder',
+    loadComponent: () => import('app/screens/profile/reminder/reminder').then(m => m.Reminder),
+  },
 ];

@@ -1,3 +1,5 @@
+import {HoursTimes} from '@core/type/hours-times';
+
 export interface User {
   id?: number;
   name: string;
@@ -5,7 +7,7 @@ export interface User {
   nativeLanguageId: number;
   languageLevelId: number;
   passcode: string | null;
-  reminder: { hour: string, minutes: string} | null;
+  reminder: HoursTimes | null;
   isOnboarded: boolean;
   isTutorialCompleted: boolean;
   createdAt: string;

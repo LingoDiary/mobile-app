@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {db} from '../db/db';
 import {UserDTO} from '../dto/user.dto';
 import {User} from '../db/db-tables';
-import {Reminder} from '@core/type/reminder';
+import {HoursTimes} from '@core/type/hours-times';
 
 @Injectable({providedIn: 'root'})
 export class UserRepository {
@@ -49,7 +49,7 @@ export class UserRepository {
     return null;
   }
 
-  async getReminder(): Promise<Reminder | null> {
+  async getReminder(): Promise<HoursTimes | null> {
     const user: User | null = await this.user() ?? null;
     if (user) {
       return user.reminder;
@@ -77,7 +77,7 @@ export class UserRepository {
     await db.users.update(this.USER_ID, {languageLevelId});
   }
 
-  async updateReminder(reminder: Reminder | null): Promise<void> {
+  async updateReminder(reminder: HoursTimes | null): Promise<void> {
     await db.users.update(this.USER_ID, {reminder});
   }
 }
