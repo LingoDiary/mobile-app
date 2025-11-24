@@ -3,7 +3,7 @@ import {signal} from '@angular/core';
 
 export abstract class NestedChildActions {
 
-  value = signal<string|null>(null);
+  value = signal<any>(null);
   isValid = signal<boolean>(true);
 
   onValidChange(val: boolean) {

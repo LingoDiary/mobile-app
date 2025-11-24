@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit, Output, signal} from '@angular/core';
-import {Mentor} from '../../../core/data/interfaces/Mentor';
-import {mentors} from '../../../core/data/mentors';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, signal} from '@angular/core';
+import {Mentor} from '@core/data/interfaces/Mentor';
+import {mentors} from '@core/data/mentors';
 
 
 
@@ -10,29 +10,40 @@ import {mentors} from '../../../core/data/mentors';
   templateUrl: './mentors.html',
   styleUrl: './mentors.scss',
 })
-export class Mentors implements OnInit {
+export class Mentors implements OnInit, OnChanges {
 
   @Output() validChange = new EventEmitter<boolean>();
   @Output() stateChange = new EventEmitter<{ key: string, value: any }>();
 
+  @Input() value: number | null = null;
+
   mentors: Array<Mentor> = [];
+  activeIndex = signal<number>(0);
 
   ngOnInit(): void {
     this.mentors = mentors;
+
+    // устанавливаем начальный индекс
+    const index = this.value ? this.value - 1 : 0;
+    this.activeIndex.set(index);
+
     this.validChange.emit(true);
     this.stateChange.emit({
-      key: 'mentor_id',
-      value: this.mentors[0].id,
+      key: 'mentorId',
+      value: this.mentors[index].id,
     });
   }
 
-  activeIndex = signal<number>(0);
+  ngOnChanges(): void {
+    if (this.value !== null) {
+      this.activeIndex.set(this.value - 1);
+    }
+  }
 
   private startX = 0;
   private endX = 0;
   private threshold = 50;
 
-  // Touch
   startTouch(event: TouchEvent) {
     this.startX = event.touches[0].clientX;
   }

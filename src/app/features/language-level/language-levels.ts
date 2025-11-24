@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, signal} from '@angular/core';
-import {languageLevels} from '../../../core/data/language-levels';
-import {LanguageLevel} from '../../../core/data/interfaces/LanguageLevel';
+import {languageLevels} from '@core/data/language-levels';
+import {LanguageLevel} from '@core/data/interfaces/LanguageLevel';
 
 @Component({
   selector: 'app-language-levels',

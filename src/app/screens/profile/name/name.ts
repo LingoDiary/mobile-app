@@ -1,8 +1,6 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Content} from "@app/components/grid/content/content";
 import {Button} from '@app/components/ui/button/button';
-import {img} from '@app/shared/utils/helpers';
-import {Router} from '@angular/router';
 import {Name as NameFeature} from '@app/features/name/name'
 import {UserRepository} from '@core/storage/user.storage';
 import {AlertService} from '@app/core/services/alert/alert';
@@ -24,8 +22,6 @@ export class Name extends NestedChildActions implements OnInit {
 
   private readonly userRepository: UserRepository = inject(UserRepository);
   private readonly alert: AlertService = inject(AlertService);
-
-  protected readonly img = img;
 
   async ngOnInit() {
     const name: string | null = await this.userRepository.getName();

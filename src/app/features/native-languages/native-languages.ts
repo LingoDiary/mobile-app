@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, signal} from '@angular/core';
-import {nativeLanguages} from '../../../core/data/native-languages';
-import {NativeLanguage} from '../../../core/data/interfaces/NativeLanguage';
+import {nativeLanguages} from '@core/data/native-languages';
+import {NativeLanguage} from '@core/data/interfaces/NativeLanguage';
 
 @Component({
   selector: 'app-native-languages',

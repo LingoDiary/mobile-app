@@ -17,9 +17,17 @@ export class UserRepository {
   }
 
   async getName(): Promise<string | null> {
-    const user: User | null = await db.users.get(this.USER_ID) ?? null;
+    const user: User | null = await this.user() ?? null;
     if (user) {
       return user.name;
+    }
+    return null;
+  }
+
+  async getMentor(): Promise<number | null> {
+    const user: User | null =  await this.user() ?? null;
+    if (user) {
+      return user.mentorId;
     }
     return null;
   }
@@ -30,5 +38,9 @@ export class UserRepository {
 
   async updatePasscode(passcode: string | null): Promise<void> {
     await db.users.update(this.USER_ID, { passcode });
+  }
+
+  async updateMentor(mentorId: number): Promise<void> {
+    await db.users.update(this.USER_ID, { mentorId });
   }
 }

@@ -1,0 +1,37 @@
+import {Component, inject, OnInit} from '@angular/core';
+import {Back} from "@app/components/ui/back/back";
+import {Button} from "@app/components/ui/button/button";
+import {Content} from "@app/components/grid/content/content";
+import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
+import {Mentors} from '@app/features/mentors/mentors';
+import {UserRepository} from '@core/storage/user.storage';
+import {AlertService} from '@app/core/services/alert/alert';
+
+@Component({
+  selector: 'app-mentor',
+  imports: [
+    Back,
+    Button,
+    Content,
+    Mentors
+  ],
+  templateUrl: './mentor.html',
+  styleUrl: './mentor.scss',
+})
+export class Mentor extends NestedChildActions implements OnInit {
+
+  private readonly userRepository: UserRepository = inject(UserRepository);
+  private readonly alert: AlertService = inject(AlertService);
+
+  async ngOnInit() {
+    const mentorId: number | null = await this.userRepository.getMentor();
+    this.value.set(mentorId);
+    if (mentorId) this.isValid.set(true);
+  }
+
+  onSave(): void {
+    this.userRepository.updateMentor(this.value());
+    this.alert.show('Successfully saved', 'success');
+  }
+
+}
