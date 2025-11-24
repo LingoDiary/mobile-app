@@ -23,7 +23,6 @@ export class Mentors implements OnInit, OnChanges {
   ngOnInit(): void {
     this.mentors = mentors;
 
-    // устанавливаем начальный индекс
     const index = this.value ? this.value - 1 : 0;
     this.activeIndex.set(index);
 

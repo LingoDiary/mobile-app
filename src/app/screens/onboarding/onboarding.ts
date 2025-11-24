@@ -112,11 +112,12 @@ export class Onboarding implements OnInit {
       return acc;
     }, {} as Record<string, any>);
 
+
     const user: UserDTO = {
-      name: dataMap['name'] ?? '',
-      mentorId: dataMap['mentorId'] ?? 0,
-      nativeLanguageId: dataMap['nativeLanguageId'] ?? 0,
-      languageLevelId: dataMap['languageLevelId'] ?? 0,
+      name: dataMap['name'],
+      mentorId: Number(dataMap['mentorId']),
+      nativeLanguageId:  Number(dataMap['nativeLanguageId']),
+      languageLevelId:  Number(dataMap['languageLevelId']),
       passcode: dataMap['passcode'] ?? null,
       reminder: dataMap['reminder']
         ? {
