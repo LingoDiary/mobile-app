@@ -32,6 +32,14 @@ export class UserRepository {
     return null;
   }
 
+  async getNativeLanguage(): Promise<number | null> {
+    const user: User | null =  await this.user() ?? null;
+    if (user) {
+      return user.nativeLanguageId;
+    }
+    return null;
+  }
+
   async updateName(name: string): Promise<void> {
     await db.users.update(this.USER_ID, { name });
   }
@@ -42,5 +50,9 @@ export class UserRepository {
 
   async updateMentor(mentorId: number): Promise<void> {
     await db.users.update(this.USER_ID, { mentorId });
+  }
+
+  async updateNativeLanguage(nativeLanguageId: number): Promise<void> {
+    await db.users.update(this.USER_ID, { nativeLanguageId });
   }
 }

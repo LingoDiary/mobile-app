@@ -33,4 +33,8 @@ export const routes: Routes = [
     path: 'profile/mentor',
     loadComponent: () => import('app/screens/profile/mentor/mentor').then(m => m.Mentor),
   },
+  {
+    path: 'profile/native-language',
+    loadComponent: () => import('app/screens/profile/native-language/native-language').then(m => m.NativeLanguage),
+  },
 ];

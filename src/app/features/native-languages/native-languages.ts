@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, signal} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, signal} from '@angular/core';
 import {nativeLanguages} from '@core/data/native-languages';
 import {NativeLanguage} from '@core/data/interfaces/NativeLanguage';
 
@@ -13,10 +13,15 @@ export class NativeLanguages implements OnInit {
   @Output() validChange = new EventEmitter<boolean>();
   @Output() stateChange = new EventEmitter<{ key: string, value: any }>();
 
+  @Input() value: number | null = null;
+
   nativeLanguages: Array<NativeLanguage> = [];
 
   ngOnInit(): void {
     this.nativeLanguages = nativeLanguages;
+    if (this.value) {
+      this.setNativeLanguage(this.value);
+    }
   }
 
   selectedNativeLanguageId = signal<number | null>(null);

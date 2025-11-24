@@ -26,15 +26,15 @@ export class Passcode extends NestedChildActions {
 
   isPasscodeEntered = computed(() => !!this.value()?.length);
 
-  onSave(): void {
-    this.userRepository.updatePasscode(this.value());
+  async onSave(): Promise<void>{
+    await this.userRepository.updatePasscode(this.value());
     this.alert.show('Successfully saved', 'success');
     this.passcode.clear();
     this.value.set(null);
   }
 
-  onDrop(): void {
-    this.userRepository.updatePasscode(null);
+  async onDrop(): Promise<void>{
+    await this.userRepository.updatePasscode(null);
     this.alert.show('Successfully removed', 'success');
   }
 }

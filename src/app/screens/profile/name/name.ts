@@ -29,8 +29,8 @@ export class Name extends NestedChildActions implements OnInit {
     if (name) this.isValid.set(true);
   }
 
-  onSave(): void {
-    this.userRepository.updateName(this.value() as string);
+  async onSave(): Promise<void>{
+    await this.userRepository.updateName(this.value() as string);
     this.alert.show('Successfully saved', 'success');
   }
 

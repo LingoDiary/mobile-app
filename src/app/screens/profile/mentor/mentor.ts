@@ -29,8 +29,8 @@ export class Mentor extends NestedChildActions implements OnInit {
     if (mentorId) this.isValid.set(true);
   }
 
-  onSave(): void {
-    this.userRepository.updateMentor(this.value());
+  async onSave(): Promise<void> {
+    await this.userRepository.updateMentor(this.value());
     this.alert.show('Successfully saved', 'success');
   }
 

@@ -114,9 +114,9 @@ export class Onboarding implements OnInit {
 
     const user: UserDTO = {
       name: dataMap['name'] ?? '',
-      mentorId: dataMap['mentor_id'] ?? 0,
-      nativeLanguageId: dataMap['native_language_id'] ?? 0,
-      languageLevelId: dataMap['language_level_id'] ?? 0,
+      mentorId: dataMap['mentorId'] ?? 0,
+      nativeLanguageId: dataMap['nativeLanguageId'] ?? 0,
+      languageLevelId: dataMap['languageLevelId'] ?? 0,
       passcode: dataMap['passcode'] ?? null,
       reminder: dataMap['reminder']
         ? {
