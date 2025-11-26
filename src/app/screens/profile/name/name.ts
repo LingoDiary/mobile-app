@@ -6,7 +6,6 @@ import {UserRepository} from '@core/repository/user.repository';
 import {AlertService} from '@app/core/services/alert/alert';
 import {Back} from '@app/components/ui/back/back';
 import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
-import {DiaryScreen} from '@app/screens/diary/diary';
 
 @Component({
   selector: 'app-name-screen',

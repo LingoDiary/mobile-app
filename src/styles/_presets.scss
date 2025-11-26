@@ -25,13 +25,16 @@ textarea {
 .screen {
 
   &__back {
-    margin: 0 -1rem;
+    .btn {
+      img {
+        transform: translateX(-1rem);
+      }
+    }
   }
 
   &__heading {
     font-size: 2rem;
     font-weight: 800;
-    margin-bottom: 1rem;
     font-family: var(--basiquePro), sans-serif;
   }
 

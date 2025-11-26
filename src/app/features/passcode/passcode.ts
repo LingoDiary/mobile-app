@@ -10,7 +10,6 @@ import {
 
 @Component({
   selector: 'app-passcode',
-  standalone: true,
   templateUrl: './passcode.html',
   styleUrl: './passcode.scss',
 })

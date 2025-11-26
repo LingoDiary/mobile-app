@@ -3,7 +3,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-name',
-  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './name.html',
   styleUrl: './name.scss',

@@ -27,19 +27,22 @@
             </a>
           </div>
         }
+
+        @if (!reachedEnd()) {
+          <div
+            class="observer-trigger"
+            appIntersectionObserver
+            (visible)="onBottomReached()"
+          >
+            @if (loading()) {
+              <div class="loading">Loading...</div>
+            }
+          </div>
+        }
+
       </div>
 
-      @if (!reachedEnd()) {
-        <div
-          class="observer-trigger"
-          appIntersectionObserver
-          (visible)="onBottomReached()"
-        >
-          @if (loading()) {
-            <div class="loading">Loading...</div>
-          }
-        </div>
-      }
+
     }
 
     @if (translations().length === 0 && reachedEnd()) {
@@ -49,7 +52,7 @@
     }
 
     <div class="screen__action">
-      <app-button >
+      <app-button (click)="onNew()">
         <img [src]="img('icons/plus.svg')" alt="plus.svg">
       </app-button>
     </div>

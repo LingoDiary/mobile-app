@@ -1,0 +1,56 @@
+<app-content>
+
+  <div header>
+    <div class="screen__heading">
+      {{ isEdit() ? 'Edit word' : 'New word' }}
+    </div>
+  </div>
+
+  <div body>
+    <app-back [url]="'/dictionary'" />
+    <div class="entry__form">
+      <input
+        class="entry__control phrase"
+        type="text"
+        placeholder="Phrase"
+        [value]="phrase()"
+        (input)="phrase.set($any($event.target).value)"
+        maxlength="255"
+      />
+
+      <input
+        class="entry__control translation"
+        type="text"
+        placeholder="Translation"
+        [value]="translation()"
+        (input)="translation.set($any($event.target).value)"
+        maxlength="255"
+      />
+    </div>
+
+    <div class="entry__action">
+      <app-button
+        [extraClass]="'full-width'"
+        [disabled]="!isValid()"
+        (click)="save()"
+      >
+        Save
+      </app-button>
+
+      @if (isEdit()) {
+        <app-button
+          [type]="'outline'"
+          [extraClass]="'full-width'"
+          (click)="delete()"
+        >
+          Delete
+        </app-button>
+      }
+    </div>
+  </div>
+
+  <div navigation>
+    <app-navigation />
+  </div>
+
+</app-content>

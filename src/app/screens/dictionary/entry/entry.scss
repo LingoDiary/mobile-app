@@ -1,0 +1,38 @@
+.entry {
+  &__form {
+    display: grid;
+    margin-bottom: 2rem;
+  }
+
+  &__control {
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+
+    &:focus,
+    &:hover {
+      outline: none;
+    }
+
+    &::placeholder {
+      opacity: 0.6;
+    }
+
+    &.phrase {
+      position: relative;
+      z-index: 1;
+      transform: translateY(0.063rem);
+      border-radius: 1rem 1rem 0 0;
+    }
+
+    &.translation {
+      position: relative;
+      z-index: 2;
+      border-radius: 0 0 1rem 1rem;
+    }
+  }
+
+  &__action {
+    display: grid;
+    gap: 1rem;
+  }
+}

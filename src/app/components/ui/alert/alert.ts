@@ -3,7 +3,6 @@ import { AlertService } from '@app/core/services/alert/alert';
 
 @Component({
   selector: 'app-alert',
-  standalone: true,
   templateUrl: './alert.html',
   styleUrl: './alert.scss'
 })

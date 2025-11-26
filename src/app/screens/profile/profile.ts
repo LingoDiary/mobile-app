@@ -7,7 +7,6 @@ import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-profile-screen',
-  standalone: true,
   imports: [
     Content,
     Navigation,

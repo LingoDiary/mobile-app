@@ -6,7 +6,6 @@ import {mentors} from '@core/data/mentors';
 
 @Component({
   selector: 'app-mentors',
-  standalone: true,
   templateUrl: './mentors.html',
   styleUrl: './mentors.scss',
 })

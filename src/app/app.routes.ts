@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
 export const routes: Routes = [
   {
@@ -16,6 +16,14 @@ export const routes: Routes = [
   {
     path: 'dictionary',
     loadComponent: () => import('app/screens/dictionary/list/list').then(m => m.ListScreen),
+  },
+  {
+    path: 'dictionary/entry',
+    loadComponent: () => import('app/screens/dictionary/entry/entry').then(m => m.EntryScreen),
+  },
+  {
+    path: 'dictionary/entry/:id',
+    loadComponent: () => import('app/screens/dictionary/entry/entry').then(m => m.EntryScreen),
   },
   {
     path: 'profile',

@@ -3,7 +3,6 @@ import {HoursTimes} from '@core/type/hours-times';
 
 @Component({
   selector: 'app-reminder',
-  standalone: true,
   templateUrl: './reminder.html',
   styleUrl: './reminder.scss',
 })

@@ -7,11 +7,9 @@ import { img } from '@app/shared/utils/helpers';
 import {UserRepository} from '@core/repository/user.repository';
 import {Back} from '@app/components/ui/back/back';
 import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
-import {DiaryScreen} from '@app/screens/diary/diary';
 
 @Component({
   selector: 'app-passcode-screen',
-  standalone: true,
   imports: [Button, Content, PasscodeFeature, Back],
   templateUrl: './passcode.html',
   styleUrl: './passcode.scss',

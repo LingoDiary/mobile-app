@@ -7,7 +7,6 @@ import {Alert} from '@app/components/ui/alert/alert';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [RouterOutlet, Viewport, Alert],
   templateUrl: './app.html',
   styleUrl: './app.scss'

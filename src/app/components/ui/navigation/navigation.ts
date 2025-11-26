@@ -5,7 +5,6 @@ import {img} from '@app/shared/utils/helpers';
 
 @Component({
   selector: 'app-navigation',
-  standalone: true,
   imports: [
     RouterLink,
     FontAwesomeModule,

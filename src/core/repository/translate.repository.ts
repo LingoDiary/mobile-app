@@ -10,7 +10,7 @@ export interface PageResult<T> {
 @Injectable({ providedIn: 'root' })
 export class TranslateRepository {
 
-  PAGE_SIZE = 20;
+  PAGE_SIZE = 10;
 
   async loadPage(cursor: number | null): Promise<PageResult<Translate>> {
     let collection;
@@ -48,4 +48,17 @@ export class TranslateRepository {
   async create(item: Translate): Promise<void> {
     await db.translates.put(item);
   }
+
+  async findById(id: number) {
+    return db.translates.get(id);
+  }
+
+  async update(data: Translate) {
+    await db.translates.put(data);
+  }
+
+  async delete(id: number) {
+    await db.translates.delete(id);
+  }
+
 }

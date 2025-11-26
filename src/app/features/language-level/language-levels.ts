@@ -4,7 +4,6 @@ import {LanguageLevel} from '@core/data/interfaces/LanguageLevel';
 
 @Component({
   selector: 'app-language-levels',
-  standalone: true,
   templateUrl: './language-levels.html',
   styleUrl: './language-levels.scss',
 })

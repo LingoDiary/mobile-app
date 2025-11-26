@@ -2,7 +2,7 @@ import {Component, inject, OnInit, signal} from '@angular/core';
 import {Content} from '@app/components/grid/content/content';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {Navigation} from '@app/components/ui/navigation/navigation';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import {TranslateRepository} from '@core/repository/translate.repository';
 import {IntersectionObserverDirective} from '@core/directive/intersection-observer.directive';
@@ -23,6 +23,9 @@ import {img} from '@app/shared/utils/helpers';
   styleUrl: './list.scss',
 })
 export class ListScreen implements OnInit {
+  protected readonly img = img;
+
+  private router: Router = inject(Router);
   private translateRepository: TranslateRepository = inject(TranslateRepository);
 
   faSearch = faSearch;
@@ -33,11 +36,11 @@ export class ListScreen implements OnInit {
 
   nextCursor: null | number = null;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadMore();
   }
 
-  async loadMore() {
+  async loadMore(): Promise<void> {
     if (this.loading() || this.reachedEnd()) return;
 
     this.loading.set(true);
@@ -46,10 +49,11 @@ export class ListScreen implements OnInit {
 
     if (res.data.length > 0) {
       this.translations.set([...this.translations(), ...res.data]);
-      this.nextCursor = res.nextCursor;
     }
 
-    if (!res.data.length || res.nextCursor === null) {
+    this.nextCursor = res.nextCursor;
+
+    if (res.nextCursor === null) {
       this.reachedEnd.set(true);
     }
 
@@ -57,11 +61,16 @@ export class ListScreen implements OnInit {
   }
 
 
-  onBottomReached() {
+
+  onBottomReached(): void {
     if (!this.reachedEnd()) {
       this.loadMore();
     }
   }
 
-  protected readonly img = img;
+  onNew(): void {
+    this.router.navigate(['/dictionary/entry']);
+  }
+
+
 }
