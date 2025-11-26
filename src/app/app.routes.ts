@@ -15,7 +15,7 @@ export const routes: Routes = [
   },
   {
     path: 'dictionary',
-    loadComponent: () => import('app/screens/dictionary/dictionary').then(m => m.DictionaryScreen),
+    loadComponent: () => import('app/screens/dictionary/list/list').then(m => m.ListScreen),
   },
   {
     path: 'profile',

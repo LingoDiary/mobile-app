@@ -4,7 +4,7 @@ import { Content } from '@app/components/grid/content/content';
 import { Passcode as PasscodeFeature } from '@app/features/passcode/passcode';
 import { AlertService } from '@app/core/services/alert/alert';
 import { img } from '@app/shared/utils/helpers';
-import {UserRepository} from '@core/storage/user.storage';
+import {UserRepository} from '@core/repository/user.repository';
 import {Back} from '@app/components/ui/back/back';
 import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
 import {DiaryScreen} from '@app/screens/diary/diary';

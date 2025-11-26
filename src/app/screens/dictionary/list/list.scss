@@ -1,0 +1,29 @@
+.dictionary {
+  padding-bottom: 5rem;
+  &__word {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+
+    &-content {
+      display: grid;
+      gap: 0.3rem;
+      font-size: 1.1rem;
+      text-decoration: none;
+      color: var(--text-color);
+    }
+
+    &-search {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--black);
+      width: 2.6rem;
+      height: 2.6rem;
+    }
+  }
+}

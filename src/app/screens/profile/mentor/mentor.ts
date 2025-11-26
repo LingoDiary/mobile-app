@@ -4,7 +4,7 @@ import {Button} from "@app/components/ui/button/button";
 import {Content} from "@app/components/grid/content/content";
 import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
 import {Mentors} from '@app/features/mentors/mentors';
-import {UserRepository} from '@core/storage/user.storage';
+import {UserRepository} from '@core/repository/user.repository';
 import {AlertService} from '@app/core/services/alert/alert';
 import {DiaryScreen} from '@app/screens/diary/diary';
 

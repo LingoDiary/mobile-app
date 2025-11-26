@@ -10,7 +10,7 @@ import {LanguageLevels} from '@app/features/language-level/language-levels';
 import {Passcode} from '@app/features/passcode/passcode';
 import {Reminder} from '@app/features/reminder/reminder';
 import {UserDTO} from '@core/dto/user.dto';
-import {UserRepository} from '@core/storage/user.storage';
+import {UserRepository} from '@core/repository/user.repository';
 import {Router} from '@angular/router';
 
 

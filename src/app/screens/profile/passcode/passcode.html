@@ -1,5 +1,5 @@
 <app-content>
-  <div wrapper>
+  <div body>
     <app-back [url]="'/profile'" />
     <div class="screen__heading">Passcode</div>
     <app-passcode
@@ -7,7 +7,7 @@
       (stateChange)="onStateChange($event)"
     />
   </div>
-  <div action>
+  <div navigation>
     <app-button
       (click)="isPasscodeEntered() ? onSave() : onDrop()"
       extraClass="full-width"

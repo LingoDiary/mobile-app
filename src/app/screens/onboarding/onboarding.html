@@ -1,5 +1,5 @@
 <app-content>
-  <div wrapper>
+  <div body>
 
       <div class="onboarding__steps">
         @if(step() > 0 && step() < 7) {
@@ -110,7 +110,7 @@
       </div>
     }
   </div>
-  <div action>
+  <div navigation>
     <div class="onboarding__actions" [ngClass]="step() > 1 && step() < 7 ? 'active' : ''">
       @if(step() > 1 && step() < 7) {
         <app-button (click)="previous()" [extraClass]="'full-width'" [type]="'outline'">

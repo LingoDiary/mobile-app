@@ -1,0 +1,63 @@
+<app-content>
+  <div header>
+    <div class="screen__heading">
+      Dictionary
+    </div>
+  </div>
+
+  <div body>
+    @if (translations().length > 0) {
+      <div class="dictionary">
+        @for (item of translations(); track item.id) {
+          <div class="dictionary__word">
+            <a
+              class="dictionary__word-content"
+              [routerLink]="['/dictionary/entry', item.id]"
+            >
+              <b>{{ item.phrase }}</b>
+              <span>{{ item.translation }}</span>
+            </a>
+
+            <a
+              class="dictionary__word-search"
+              [routerLink]="['/dictionary/search']"
+              [queryParams]="{ id: item.id }"
+            >
+              <fa-icon [icon]="faSearch" style="color: var(--white)"></fa-icon>
+            </a>
+          </div>
+        }
+      </div>
+
+      @if (!reachedEnd()) {
+        <div
+          class="observer-trigger"
+          appIntersectionObserver
+          (visible)="onBottomReached()"
+        >
+          @if (loading()) {
+            <div class="loading">Loading...</div>
+          }
+        </div>
+      }
+    }
+
+    @if (translations().length === 0 && reachedEnd()) {
+      <div class="empty">
+        <div class="empty-text">Nothing found</div>
+      </div>
+    }
+
+    <div class="screen__action">
+      <app-button >
+        <img [src]="img('icons/plus.svg')" alt="plus.svg">
+      </app-button>
+    </div>
+
+  </div>
+
+  <div navigation>
+    <app-navigation />
+  </div>
+
+</app-content>

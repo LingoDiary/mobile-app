@@ -1,5 +1,5 @@
 <app-content>
-  <div wrapper>
+  <div body>
     <app-back [url]="'/profile'" />
     <div class="screen__heading">Native Language</div>
     <app-native-languages
@@ -8,7 +8,7 @@
       (stateChange)="onStateChange($event)"
     />
   </div>
-  <div action>
+  <div navigation>
     <app-button
       (click)="onSave()"
       extraClass="full-width"

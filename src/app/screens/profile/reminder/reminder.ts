@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
-import {UserRepository} from '@core/storage/user.storage';
+import {UserRepository} from '@core/repository/user.repository';
 import {AlertService} from '@app/core/services/alert/alert';
 import {HoursTimes} from '@core/type/hours-times';
 import {Back} from '@app/components/ui/back/back';

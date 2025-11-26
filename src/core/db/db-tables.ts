@@ -13,3 +13,11 @@ export interface User {
   createdAt: string;
   updatedAt: string | null;
 }
+
+export interface Translate {
+  id?: number;
+  phrase: string;
+  translation: string;
+  createdAt: string;
+  updatedAt: string | null;
+}

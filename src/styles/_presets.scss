@@ -36,8 +36,8 @@ textarea {
   }
 
   &__action {
-    position: absolute;
-    bottom: 1.5rem;
+    position: fixed;
+    bottom: 8.5rem;
     right: 1.5rem;
     z-index: 3;
     .btn {

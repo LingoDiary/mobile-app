@@ -3,7 +3,7 @@ import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
 import {Back} from '@app/components/ui/back/back';
 import {Button} from '@app/components/ui/button/button';
 import {Content} from '@app/components/grid/content/content';
-import {UserRepository} from '@core/storage/user.storage';
+import {UserRepository} from '@core/repository/user.repository';
 import {AlertService} from '@app/core/services/alert/alert';
 import {NativeLanguages} from '@app/features/native-languages/native-languages';
 import {DiaryScreen} from '@app/screens/diary/diary';
