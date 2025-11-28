@@ -1,5 +1,5 @@
 import {Mentor} from './interfaces/Mentor';
-import {img} from '@app/shared/utils/helpers';
+import {img} from '../../shared/utils/helpers';
 
 export const mentors: Array<Mentor> = [
   {

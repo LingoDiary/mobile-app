@@ -8,7 +8,7 @@ import {Component, Input} from '@angular/core';
 })
 export class Button {
 
-  @Input() type: string = 'default';
+  @Input() type: 'default' | 'outline' | 'link' = 'default';
   @Input() extraClass: string = '';
   @Input() disabled: boolean = false;
 

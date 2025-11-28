@@ -1,0 +1,21 @@
+.diary {
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__search {
+    display: flex;
+    margin-bottom: 1rem;
+
+    &-control {
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+      flex-grow: 1;
+      height: 2.2rem;
+      padding: 0 1rem;
+      outline: none;
+    }
+  }
+}

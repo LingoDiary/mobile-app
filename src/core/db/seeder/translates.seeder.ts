@@ -3,70 +3,60 @@ import { Db } from '@core/db/db';
 
 export const FAKE_TRANSLATIONS: Translate[] = [
   {
-    id: 1,
     phrase: "break down",
     translation: "разобраться; сломаться",
     createdAt: "2025-01-10T10:15:00.000Z",
     updatedAt: null
   },
   {
-    id: 2,
     phrase: "look forward to",
     translation: "ожидать с нетерпением",
     createdAt: "2025-01-11T09:42:00.000Z",
     updatedAt: null
   },
   {
-    id: 3,
     phrase: "take it easy",
     translation: "не переживай; расслабься",
     createdAt: "2025-01-12T13:05:00.000Z",
     updatedAt: null
   },
   {
-    id: 4,
     phrase: "as soon as possible (ASAP)",
     translation: "как можно скорее",
     createdAt: "2025-01-12T15:19:00.000Z",
     updatedAt: null
   },
   {
-    id: 5,
     phrase: "on my own",
     translation: "самостоятельно",
     createdAt: "2025-01-13T08:33:00.000Z",
     updatedAt: null
   },
   {
-    id: 6,
     phrase: "figure out",
     translation: "понять; разобраться",
     createdAt: "2025-01-13T19:48:00.000Z",
     updatedAt: null
   },
   {
-    id: 7,
     phrase: "pretty much",
     translation: "в целом; почти",
     createdAt: "2025-01-14T10:28:00.000Z",
     updatedAt: null
   },
   {
-    id: 8,
     phrase: "by the way (BTW)",
     translation: "кстати",
     createdAt: "2025-01-14T12:10:00.000Z",
     updatedAt: null
   },
   {
-    id: 9,
     phrase: "no worries",
     translation: "не переживай",
     createdAt: "2025-01-15T09:00:00.000Z",
     updatedAt: null
   },
   {
-    id: 10,
     phrase: "grab a bite",
     translation: "перекусить",
     createdAt: "2025-01-15T11:22:00.000Z",

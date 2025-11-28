@@ -3,11 +3,11 @@ import {Content} from '@app/components/grid/content/content';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {Navigation} from '@app/components/ui/navigation/navigation';
 import {Router, RouterLink} from '@angular/router';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import {faPlus, faSearch} from '@fortawesome/free-solid-svg-icons';
 import {TranslateRepository} from '@core/repository/translate.repository';
 import {IntersectionObserverDirective} from '@core/directive/intersection-observer.directive';
 import {Button} from '@app/components/ui/button/button';
-import {img} from '@app/shared/utils/helpers';
+import {img} from '../../../../shared/utils/helpers';
 
 @Component({
   selector: 'app-list',
@@ -30,7 +30,7 @@ export class ListScreen implements OnInit {
 
   faSearch = faSearch;
 
-  translations = signal<any[]>([]);
+  items = signal<any[]>([]);
   reachedEnd = signal(false);
   loading = signal(false);
 
@@ -45,10 +45,10 @@ export class ListScreen implements OnInit {
 
     this.loading.set(true);
 
-    const res = await this.translateRepository.loadPage(this.nextCursor);
+    const res = await this.translateRepository.paginate(this.nextCursor);
 
     if (res.data.length > 0) {
-      this.translations.set([...this.translations(), ...res.data]);
+      this.items.set([...this.items(), ...res.data]);
     }
 
     this.nextCursor = res.nextCursor;
@@ -73,4 +73,5 @@ export class ListScreen implements OnInit {
   }
 
 
+  protected readonly faPlus = faPlus;
 }

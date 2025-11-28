@@ -1,20 +1,64 @@
 <app-content>
+
   <div header>
-    <div class="screen__heading">
+    <div class="screen__heading diary__heading">
       Diary
+      @if (items().length) {
+        <app-button
+          [type]="'link'"
+          (click)="toggleSearch()"
+        >
+          <fa-icon [icon]="faSearch"/>
+        </app-button>
+      }
     </div>
 
+    @if (isSearching()) {
+      <div class="diary__search">
+        <input
+          class="diary__search-control"
+          [value]="searching()"
+          (input)="onSearchInput($any($event.target).value)"
+          type="text"
+          placeholder="Search"
+        />
+      </div>
+    }
   </div>
+
   <div body>
-    BODY
+
+    <div class="diary">
+      <app-entries [items]="items()"/>
+
+      @if (!reachedEnd() && !isSearching()) {
+        <div
+          class="observer-trigger"
+          appIntersectionObserver
+          (visible)="onBottomReached()"
+        >
+          @if (loading()) {
+            <div class="text-center">
+              <fa-icon [icon]="faSpinner" class="fa-spin"/>
+            </div>
+          }
+        </div>
+      }
+
+      @if (items().length === 0 && reachedEnd()) {
+        <div class="p">Not found</div>
+      }
+    </div>
+
     <div class="screen__action">
-      <app-button >
-        <img [src]="img('icons/plus.svg')" alt="plus.svg">
+      <app-button>
+        <fa-icon [icon]="faPlus"/>
       </app-button>
     </div>
   </div>
 
   <div navigation>
-    <app-navigation />
+    <app-navigation/>
   </div>
+
 </app-content>

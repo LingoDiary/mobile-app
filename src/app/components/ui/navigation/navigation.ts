@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {img} from '@app/shared/utils/helpers';
+import {img} from '../../../../shared/utils/helpers';
 
 @Component({
   selector: 'app-navigation',

@@ -5,7 +5,7 @@ import {Name as NameFeature} from '@app/features/name/name'
 import {UserRepository} from '@core/repository/user.repository';
 import {AlertService} from '@app/core/services/alert/alert';
 import {Back} from '@app/components/ui/back/back';
-import {NestedChildActions} from '@app/shared/classes/nested-child-actions';
+import {NestedChildActions} from '../../../../shared/classes/nested-child-actions';
 
 @Component({
   selector: 'app-name-screen',

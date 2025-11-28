@@ -12,7 +12,7 @@ export class TranslateRepository {
 
   PAGE_SIZE = 10;
 
-  async loadPage(cursor: number | null): Promise<PageResult<Translate>> {
+  async paginate(cursor: number | null): Promise<PageResult<Translate>> {
     let collection;
 
     if (cursor === null) {
