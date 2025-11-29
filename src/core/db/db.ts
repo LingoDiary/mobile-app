@@ -14,10 +14,10 @@ export class Db extends Dexie {
   constructor() {
     super('LingoDiaryDB');
 
-    this.version(2).stores({
+    this.version(1).stores({
       users: '++id',
       translates: '++id',
-      entries: `++id, uuid, createdAt`,
+      entries: `++id`,
     });
 
     this.on('populate', () => {

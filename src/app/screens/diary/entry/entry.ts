@@ -1,9 +1,17 @@
-import {Component, Input, signal, computed, effect, inject, OnInit} from '@angular/core';
+import {Component, Input, signal, computed, effect, inject, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { NgClass } from '@angular/common';
 import {Content} from '@app/components/grid/content/content';
 import {Back} from '@app/components/ui/back/back';
 import {FormsModule} from '@angular/forms';
-import {faCheck, faPlus, faSave, faSearch} from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheck,
+  faPencil,
+  faPlus,
+  faSave,
+  faSearch,
+  faTrash,
+  faWandMagicSparkles
+} from '@fortawesome/free-solid-svg-icons';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {Button} from '@app/components/ui/button/button';
 import {now} from '@shared/utils/helpers';
@@ -13,6 +21,7 @@ import {UserRepository} from '@core/repository/user.repository';
 import {Entry, User} from '@core/db/db-tables';
 import { v4 as uuidv4 } from 'uuid';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AlertService} from '@app/core/services/alert/alert';
 
 @Component({
   selector: 'app-entry-form',
@@ -29,13 +38,16 @@ export class EntryScreen implements OnInit {
   protected readonly faCheck = faCheck;
   protected readonly now = now;
 
+  private readonly alert: AlertService = inject(AlertService);
   private readonly userRepository: UserRepository = inject<UserRepository>(UserRepository);
   private readonly repository: EntryRepository = inject<EntryRepository>(EntryRepository);
   private route: ActivatedRoute = inject<ActivatedRoute>(ActivatedRoute);
   private readonly router: Router = inject<Router>(Router);
 
 
+
   id = signal<number | null>(null);
+  entry: Entry | null = null;
 
   // -------------------------
   //  Constants
@@ -80,7 +92,9 @@ export class EntryScreen implements OnInit {
   );
 
   // edit mode?
-  isEditMode = computed(() => !!this.id());
+  isShowMode = signal<boolean>(false);
+
+  @ViewChild('contentInput') contentInput!: ElementRef<HTMLTextAreaElement>;
 
   constructor() {
     effect(() => {
@@ -95,11 +109,12 @@ export class EntryScreen implements OnInit {
     const param: string | null = this.route.snapshot.paramMap.get('id');
     if (param) {
       this.id.set(Number(param));
-      const result: Entry | null = await this.repository.findById(Number(this.id()));
-      if (result) {
-        this.selectedDate.set(DateTimePicker.fromISO(result.createdAt));
+      this.isShowMode.set(true);
+      this.entry = await this.repository.findById(Number(this.id()));
+      if (this.entry) {
+        this.selectedDate.set(DateTimePicker.fromISO(this.entry.createdAt));
         this.form.set({
-          content: result.content
+          content: this.entry.content
         });
       }
     }
@@ -115,12 +130,17 @@ export class EntryScreen implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    const user: User | null = await this.userRepository.user();
-    if (user) {
-      if (this.isEditMode()) {
+    const user = await this.userRepository.user();
+    if (!user) return;
 
-      } else {
-        const id: number = await this.repository.create(<Entry>{
+    try {
+      let id: number;
+
+      if (!this.id()) {
+        // ----------------------------
+        // CREATE NEW ENTRY
+        // ----------------------------
+        id = await this.repository.create(<Entry>{
           uuid: uuidv4(),
           mentorId: user.mentorId,
           content: this.form().content,
@@ -129,13 +149,39 @@ export class EntryScreen implements OnInit {
           updatedAt: null,
           analysisStatus: 'none'
         });
-        await this.router.navigate([`/diary/entry/${id}`]);
+
+      } else if (this.entry) {
+        // ----------------------------
+        // UPDATE EXISTING ENTRY
+        // ----------------------------
+
+
+        await this.repository.update(this.entry.id!, {
+          content: this.form().content,
+          createdAt: DateTimePicker.toISOLocal(this.selectedDate()),
+          updatedAt: DateTimePicker.toISOLocal(now())
+        });
+
+        id = this.entry.id!;
+        this.isShowMode.set(true);
       }
 
-    }
+      this.alert.show('Successfully saved', 'success');
+      setTimeout(() => this.router.navigate([`/diary/entry/${id}`]), 500);
 
+    } catch (e: any) {
+      alert(e.toString());
+    }
   }
 
+
+  onEdit() {
+    this.isShowMode.set(false);
+
+    setTimeout(() => {
+      this.contentInput?.nativeElement?.focus();
+    }, 0);
+  }
   onDelete() {}
   onAnalyze() {}
 
@@ -144,4 +190,7 @@ export class EntryScreen implements OnInit {
   }
 
   protected readonly DateTimePicker = DateTimePicker;
+  protected readonly faTrash = faTrash;
+  protected readonly faPencil = faPencil;
+  protected readonly faWandMagicSparkles = faWandMagicSparkles;
 }

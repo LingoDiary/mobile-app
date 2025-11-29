@@ -17,6 +17,7 @@ export class DateTimePicker {
   @Input() value: string | null = null;
   @Input() min: string | null = null;
   @Input() max: string | null = null;
+  @Input() disabled: boolean = false;
 
   // -------------------------
   // Output → notify parent

@@ -5,8 +5,14 @@
   min-height: 0;
   height: calc(100vh - 12rem);
 
-  .back {
-    margin-bottom: 0;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.4rem;
+    &-actions {
+      transform: translateX(1rem);
+    }
   }
 
   &.analyzed {
@@ -21,7 +27,7 @@
     color: var(--black);
     font-size: 1.2rem;
     border-bottom: 1px solid var(--gray);
-    padding-bottom: 0.5rem;
+
     .btn {
       padding: 0.6rem 1.6rem;
       margin: 0;
@@ -48,20 +54,24 @@
     font-size: 1.2rem;
     line-height: 1.4;
     width: 100%;
-    height: calc(100vh - 19rem);
+    height: calc(100vh - 18rem);
+    margin-bottom: 1rem;
+    background: var(--white);
 
     .analyzed & {
       flex: 1;
       resize: vertical;
       min-height: auto;
     }
+
+    &[disabled] {
+      color: var(--black);
+    }
   }
 
   &__count {
-    padding-top: 1rem;
     font-size: 1rem;
     color: var(--gray-dark, #888);
-
     .analyzed & {
       flex-shrink: 0;
     }
@@ -69,9 +79,10 @@
 
   &__actions {
     position: fixed;
-    bottom: 5.5rem;
+    bottom: 4rem;
     right: 1.5rem;
     z-index: 3;
+
     .btn {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19) !important;
     }

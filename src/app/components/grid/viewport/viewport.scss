@@ -3,12 +3,14 @@
 }
 
 .viewport {
-  position: fixed;
+  position: absolute;
   inset: 0;
   background: var(--white);
-  width: 100vw;
-  height: 100vh;
   overflow: hidden;
   font-family: var(--ttChocolates), sans-serif;
   font-size: 1rem;
+  top: 3rem;
+  bottom: 3.5rem;
+  left: 0;
+  right: 0;
 }

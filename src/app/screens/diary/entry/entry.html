@@ -1,19 +1,29 @@
 <app-content>
   <div header>
-    <app-back [url]="'/diary'"/>
-    @if (isEditMode()) {
-      <button type="button"
-              class="btn btn-default"
-              (click)="isDeleting.set(true)">
-        Delete
-      </button>
-    }
+    <div class="entry__header">
+      <app-back [url]="'/diary'"/>
+      @if (isShowMode()) {
+        <div class="entry__header-actions">
+          <app-button
+            [type]="'link'"
+            (click)="onEdit()">
+            <fa-icon [icon]="faPencil"/>
+          </app-button>
+          <app-button
+            [type]="'link'"
+            (click)="onDelete()">
+            <fa-icon [icon]="faTrash"/>
+          </app-button>
+        </div>
+      }
+    </div>
   </div>
   <div body>
     <div class="entry" [ngClass]="{ 'analyzed pb-0': false }">
 
       <div class="entry__date">
         <app-date-time-picker
+          [disabled]="isShowMode()"
           [value]="selectedDate()"
           [min]="'2020-01-01T00:00'"
           [max]="DateTimePicker.format()"
@@ -23,6 +33,8 @@
       <div class="entry__form">
         <div>
         <textarea class="entry__content"
+                  #contentInput
+                  [disabled]="isShowMode()"
                   [placeholder]="'Write your entry...'"
                   [value]="form().content"
                   [attr.maxlength]="maxLength"
@@ -41,23 +53,19 @@
       </div>
 
       <div class="entry__actions">
-        <app-button (click)="onSubmit()" [disabled]="!isValid()">
-          <fa-icon [icon]="faCheck"/>
-        </app-button>
 
-        @if (isEditMode()) {
-          @if (isAnalysisAvailable()) {
-            <button class="btn btn-default full-width"
-                    [disabled]="!isValid()"
-                    (click)="onAnalyze()">
-              Analyze
-            </button>
-          } @else {
-            <div class="text text-center">
-              Already analyzed
-            </div>
-          }
+        @if(!isShowMode()) {
+          <app-button (click)="onSubmit()" [disabled]="!isValid()">
+            <fa-icon [icon]="faCheck"/>
+          </app-button>
         }
+
+        @if (isShowMode() && isAnalysisAvailable()) {
+          <app-button (click)="onSubmit()" [disabled]="!isValid()">
+            <fa-icon [icon]="faWandMagicSparkles"/>
+          </app-button>
+        }
+
       </div>
 
       @if (isDeleting()) {

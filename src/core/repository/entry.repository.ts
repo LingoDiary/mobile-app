@@ -14,6 +14,10 @@ export class EntryRepository {
     return db.entries.add(item);
   }
 
+  async update(id: number, changes: Partial<Entry>): Promise<void> {
+    await db.entries.update(id, changes);
+  }
+
   async findById(id: number): Promise<Entry | null> {
     return await db.entries.get(id) ?? null;
   }
