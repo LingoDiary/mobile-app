@@ -1,0 +1,20 @@
+.dtp {
+  display: flex;
+  align-items: center;
+
+  &__input {
+    font-size: 1.1rem;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: var(--ttChocolates), sans-serif;
+    color: var(--black);
+    font-weight: 700;
+
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+  }
+}

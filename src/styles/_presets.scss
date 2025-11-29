@@ -26,6 +26,7 @@ textarea {
 
   &__back {
     .btn {
+      padding: 0.5rem 1rem !important;
       img {
         transform: translateX(-1rem);
       }

@@ -1,6 +1,7 @@
 import {HoursTimes} from '@core/type/hours-times';
 
 export interface UserDTO {
+  uuid: string;
   name: string;
   mentorId: number;
   nativeLanguageId: number;

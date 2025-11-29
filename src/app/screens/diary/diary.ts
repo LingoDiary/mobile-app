@@ -13,6 +13,7 @@ import {Entries} from '@app/screens/diary/_parts/entries/entries';
 import {IntersectionObserverDirective} from '@core/directive/intersection-observer.directive';
 import {Entry} from '@core/db/db-tables';
 import {db} from '@core/db/db';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-diary-screen',
@@ -32,6 +33,7 @@ export class DiaryScreen implements OnInit {
   protected readonly img = img;
 
   private entryRepository: EntryRepository = inject(EntryRepository);
+  protected router: Router = inject(Router);
 
   isSearching = signal(false);
   searching = signal('');

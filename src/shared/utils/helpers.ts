@@ -20,3 +20,10 @@ export function formatTime(dateString: string): string {
     timeZone: timezone(),
   });
 }
+
+
+export function now(): string {
+  const now = new Date().toISOString();
+
+  return now.substring(0, 16);
+}

@@ -37,11 +37,6 @@
           appIntersectionObserver
           (visible)="onBottomReached()"
         >
-          @if (loading()) {
-            <div class="text-center">
-              <fa-icon [icon]="faSpinner" class="fa-spin"/>
-            </div>
-          }
         </div>
       }
 
@@ -51,7 +46,7 @@
     </div>
 
     <div class="screen__action">
-      <app-button>
+      <app-button (click)="router.navigate(['diary/entry'])">
         <fa-icon [icon]="faPlus"/>
       </app-button>
     </div>

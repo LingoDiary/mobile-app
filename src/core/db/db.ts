@@ -15,13 +15,13 @@ export class Db extends Dexie {
     super('LingoDiaryDB');
 
     this.version(2).stores({
-      users: '++id, createdAt',
-      translates: '++id, createdAt',
+      users: '++id',
+      translates: '++id',
       entries: `++id, uuid, createdAt`,
     });
 
     this.on('populate', () => {
-      this.seed();
+      //this.seed();
     });
   }
 

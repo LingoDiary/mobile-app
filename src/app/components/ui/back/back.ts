@@ -1,6 +1,6 @@
 import {Component, inject, Input} from '@angular/core';
 import {Button} from "@app/components/ui/button/button";
-import {img} from '../../../../shared/utils/helpers';
+import {img} from '@shared/utils/helpers';
 import {Router} from '@angular/router';
 
 @Component({

@@ -2,7 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {Back} from "@app/components/ui/back/back";
 import {Button} from "@app/components/ui/button/button";
 import {Content} from "@app/components/grid/content/content";
-import {NestedChildActions} from '../../../../shared/classes/nested-child-actions';
+import {NestedChildActions} from '@shared/classes/nested-child-actions';
 import {Mentors} from '@app/features/mentors/mentors';
 import {UserRepository} from '@core/repository/user.repository';
 import {AlertService} from '@app/core/services/alert/alert';

@@ -1,5 +1,5 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {img} from '../../../shared/utils/helpers';
+import {img} from '@shared/utils/helpers';
 import {Content} from '@app/components/grid/content/content';
 import {Button} from '@app/components/ui/button/button';
 import {Mentors} from '@app/features/mentors/mentors';
@@ -12,7 +12,7 @@ import {Reminder} from '@app/features/reminder/reminder';
 import {UserDTO} from '@core/dto/user.dto';
 import {UserRepository} from '@core/repository/user.repository';
 import {Router} from '@angular/router';
-
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-onboarding-screen',
@@ -112,6 +112,7 @@ export class Onboarding implements OnInit {
     }, {} as Record<string, any>);
 
     const user: UserDTO = {
+      uuid: uuidv4(),
       name: dataMap['name'],
       mentorId: Number(dataMap['mentorId']),
       nativeLanguageId: Number(dataMap['nativeLanguageId']),

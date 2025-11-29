@@ -10,6 +10,14 @@ export const routes: Routes = [
     loadComponent: () => import('app/screens/diary/diary').then(m => m.DiaryScreen),
   },
   {
+    path: 'diary/entry',
+    loadComponent: () => import('app/screens/diary/entry/entry').then(m => m.EntryScreen),
+  },
+  {
+    path: 'diary/entry/:id',
+    loadComponent: () => import('app/screens/diary/entry/entry').then(m => m.EntryScreen),
+  },
+  {
     path: 'calender',
     loadComponent: () => import('@app/screens/calendar/calendar').then(m => m.CalendarScreen),
   },

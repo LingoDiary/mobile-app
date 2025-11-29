@@ -6,7 +6,6 @@ export const FAKE_ENTRIES: Entry[] = [
   {
     uuid: uuidv4(),
     mentorId: 1,
-    title: "My first diary entry",
     content: "Today I started using LingoDiary. It feels nice to write something in English.",
     analysis: null,
     analysisStatus: 'none',
@@ -16,7 +15,6 @@ export const FAKE_ENTRIES: Entry[] = [
   {
     uuid: uuidv4(),
     mentorId: 2,
-    title: "Learning new words",
     content: "I learned several new phrasal verbs today: break down, look forward to, figure out.",
     analysis: null,
     analysisStatus: 'none',
@@ -26,7 +24,6 @@ export const FAKE_ENTRIES: Entry[] = [
   {
     uuid: uuidv4(),
     mentorId: 1,
-    title: "A productive day",
     content: "I wrote a short story in English and it was surprisingly fun!",
     analysis: null,
     analysisStatus: 'none',
@@ -36,7 +33,6 @@ export const FAKE_ENTRIES: Entry[] = [
   {
     uuid: uuidv4(),
     mentorId: 3,
-    title: "Quick note",
     content: "Didn't have much time today, just noting down a few thoughts.",
     analysis: null,
     analysisStatus: 'none',

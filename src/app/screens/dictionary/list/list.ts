@@ -7,7 +7,7 @@ import {faPlus, faSearch} from '@fortawesome/free-solid-svg-icons';
 import {TranslateRepository} from '@core/repository/translate.repository';
 import {IntersectionObserverDirective} from '@core/directive/intersection-observer.directive';
 import {Button} from '@app/components/ui/button/button';
-import {img} from '../../../../shared/utils/helpers';
+import {img} from '@shared/utils/helpers';
 
 @Component({
   selector: 'app-list',

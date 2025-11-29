@@ -1,0 +1,11 @@
+<div class="dtp">
+  <fa-icon [icon]="faCalendar"/>
+  <input
+    type="datetime-local"
+    class="dtp__input"
+    [value]="datetime()"
+    [attr.min]="min"
+    [attr.max]="max"
+    (change)="onChange($event)"
+  />
+</div>

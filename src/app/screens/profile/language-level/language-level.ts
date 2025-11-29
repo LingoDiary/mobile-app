@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {NestedChildActions} from '../../../../shared/classes/nested-child-actions';
+import {NestedChildActions} from '@shared/classes/nested-child-actions';
 import {UserRepository} from '@core/repository/user.repository';
 import {AlertService} from '@app/core/services/alert/alert';
 import {Back} from '@app/components/ui/back/back';

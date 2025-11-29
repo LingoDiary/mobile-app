@@ -1,0 +1,89 @@
+<app-content>
+  <div header>
+    <app-back [url]="'/diary'"/>
+    @if (isEditMode()) {
+      <button type="button"
+              class="btn btn-default"
+              (click)="isDeleting.set(true)">
+        Delete
+      </button>
+    }
+  </div>
+  <div body>
+    <div class="entry" [ngClass]="{ 'analyzed pb-0': false }">
+
+      <div class="entry__date">
+        <app-date-time-picker
+          [value]="selectedDate()"
+          [min]="'2020-01-01T00:00'"
+          [max]="DateTimePicker.format()"
+          (valueChange)="onDateUpdated($event)" />
+      </div>
+
+      <div class="entry__form">
+        <div>
+        <textarea class="entry__content"
+                  [placeholder]="'Write your entry...'"
+                  [value]="form().content"
+                  [attr.maxlength]="maxLength"
+                  (input)="onContentInput($any($event.target).value)"
+                  style="resize: none;">
+        </textarea>
+
+          <div class="help-text">
+            Min length: {{ minContentLength }}
+          </div>
+
+          <div class="entry__count">
+            {{ contentLength() }} / {{ maxLength }}
+          </div>
+        </div>
+      </div>
+
+      <div class="entry__actions">
+        <app-button (click)="onSubmit()" [disabled]="!isValid()">
+          <fa-icon [icon]="faCheck"/>
+        </app-button>
+
+        @if (isEditMode()) {
+          @if (isAnalysisAvailable()) {
+            <button class="btn btn-default full-width"
+                    [disabled]="!isValid()"
+                    (click)="onAnalyze()">
+              Analyze
+            </button>
+          } @else {
+            <div class="text text-center">
+              Already analyzed
+            </div>
+          }
+        }
+      </div>
+
+      @if (isDeleting()) {
+        <div class="modal">
+          <div class="modal__content">
+
+            <div class="modal__body text-center mb-2">
+              Confirm deletion?
+            </div>
+
+            <div class="modal__action">
+              <button class="btn btn-default full-width"
+                      (click)="onDelete()">
+                Confirm
+              </button>
+
+              <button class="btn btn-default btn-outline full-width"
+                      (click)="isDeleting.set(false)">
+                Cancel
+              </button>
+            </div>
+
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+</app-content>

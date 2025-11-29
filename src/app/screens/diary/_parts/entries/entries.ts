@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {DiaryGroup} from '@core/type/diary-group';
-import {formatTime} from '../../../../../shared/utils/helpers';
+import {formatTime} from '@shared/utils/helpers';
 
 @Component({
   selector: 'app-entries',

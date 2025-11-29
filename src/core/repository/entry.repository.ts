@@ -10,6 +10,14 @@ export class EntryRepository {
 
   PAGE_SIZE = 10;
 
+  async create(item: Entry): Promise<number> {
+    return db.entries.add(item);
+  }
+
+  async findById(id: number): Promise<Entry | null> {
+    return await db.entries.get(id) ?? null;
+  }
+
   /*
   async create(entry: {
     title: string;

@@ -1,8 +1,8 @@
 import {HoursTimes} from '@core/type/hours-times';
-import {DiaryAnalysis} from '@core/type/diary-analysis';
 
 export interface User {
   id?: number;
+  uuid: string;
   name: string;
   mentorId: number;
   nativeLanguageId: number;
@@ -19,9 +19,8 @@ export interface Entry {
   id?: number;
   uuid: string;
   mentorId: number;
-  title: string;
   content: string;
-  analysis: DiaryAnalysis | null;
+  analysis: string | null;
   analysisStatus:
     | 'none' // analysis not started
     | 'pending' // analysis in progress
