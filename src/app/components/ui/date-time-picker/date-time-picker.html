@@ -1,5 +1,6 @@
-<div class="dtp">
-  <fa-icon [icon]="faCalendar"/>
+<div class="dtp" [class.dtp--editable]="!disabled">
+  <fa-icon [icon]="faCalendar" class="dtp__calendar"/>
+
   <input
     type="datetime-local"
     class="dtp__input"
@@ -9,4 +10,5 @@
     (change)="onChange($event)"
     [disabled]="disabled"
   />
+
 </div>

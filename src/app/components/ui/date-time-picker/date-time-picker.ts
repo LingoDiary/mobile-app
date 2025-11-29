@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, signal, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
-import {faCalendar} from '@fortawesome/free-solid-svg-icons';
+import {faCalendar, faSortDown} from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-date-time-picker',
   standalone: true,
@@ -10,6 +10,8 @@ import {faCalendar} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./date-time-picker.scss']
 })
 export class DateTimePicker {
+  protected readonly faCalendar = faCalendar;
+  protected readonly faSortDown = faSortDown;
 
   // -------------------------
   // Inputs
@@ -60,5 +62,5 @@ export class DateTimePicker {
     return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }
 
-  protected readonly faCalendar = faCalendar;
+
 }
