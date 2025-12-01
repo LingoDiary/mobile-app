@@ -1,48 +1,53 @@
 @if (items.length) {
-<div class="diary__items">
-  @for (item of items; track $index) {
-    <div class="diary__item">
+<cdk-virtual-scroll-viewport
+  itemSize="160"
+  (scrolledIndexChange)="onScroll($event)"
+  class="diary__items">
+  <div
+    *cdkVirtualFor="let group of items; trackBy: trackGroup"
+    class="diary__item">
 
-      <div class="diary__item-date">
-        {{ item.display }}
-      </div>
-
-      @if (item.entries.length > 0) {
-        <div class="diary__entries">
-
-          @for (entry of item.entries; track entry.id) {
-            <a
-              class="diary__entry-link"
-              [routerLink]="['/diary/entry', entry.id]"
-            >
-              <div class="diary__entry">
-
-                <div class="diary__entry-head">
-                  <span class="diary__entry-time">
-                    {{ formatTime(entry.createdAt) }}
-                  </span>
-
-                  @if (entry.analysis) {
-                    <span class="diary__entry-status analyzed">
-                      Analysis completed
-                    </span>
-                  }
-                </div>
-
-                <div class="diary__entry-body">
-                  <div class="diary__entry-description">
-                    {{ entry.content }}
-                  </div>
-                </div>
-
-              </div>
-            </a>
-          }
-
-        </div>
-      }
-
+    <!-- Date heading -->
+    <div class="diary__item-date">
+      {{ group.display }}
     </div>
-  }
-</div>
+
+    <!-- Entries inside group -->
+    @if (group.entries.length > 0) {
+      <div class="diary__entries">
+
+        @for (entry of group.entries; track entry.id) {
+          <a
+            class="diary__entry-link"
+            [routerLink]="['/diary/entry', entry.id]"
+          >
+            <div class="diary__entry">
+
+              <div class="diary__entry-head">
+                <span class="diary__entry-time">
+                  {{ formatTime(entry.createdAt) }}
+                </span>
+
+                @if (entry.analysis) {
+                  <span class="diary__entry-status analyzed">
+                    Analysis completed
+                  </span>
+                }
+              </div>
+
+              <div class="diary__entry-body">
+                <div class="diary__entry-description">
+                  {{ entry.content }}
+                </div>
+              </div>
+
+            </div>
+          </a>
+        }
+
+      </div>
+    }
+
+  </div>
+</cdk-virtual-scroll-viewport>
 }

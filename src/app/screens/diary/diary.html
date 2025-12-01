@@ -17,7 +17,10 @@
   <div body>
 
     <div class="diary">
-      <app-entries [items]="items()"/>
+      <app-entries
+        [items]="items()"
+        (loadMore)="onBottomReached()"
+      />
 
       @if (!reachedEnd()) {
         <div
