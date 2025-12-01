@@ -6,24 +6,12 @@
       @if (items().length) {
         <app-button
           [type]="'link'"
-          (click)="toggleSearch()"
+          (click)="goToSearch()"
         >
           <fa-icon [icon]="faSearch"/>
         </app-button>
       }
     </div>
-
-    @if (isSearching()) {
-      <div class="diary__search">
-        <input
-          class="diary__search-control"
-          [value]="searching()"
-          (input)="onSearchInput($any($event.target).value)"
-          type="text"
-          placeholder="Search"
-        />
-      </div>
-    }
   </div>
 
   <div body>
@@ -31,7 +19,7 @@
     <div class="diary">
       <app-entries [items]="items()"/>
 
-      @if (!reachedEnd() && !isSearching()) {
+      @if (!reachedEnd()) {
         <div
           class="observer-trigger"
           appIntersectionObserver

@@ -3,6 +3,7 @@ import { db } from '@core/db/db';
 import { v4 as uuidv4 } from 'uuid';
 import {Entry, Translate} from '@core/db/db-tables';
 import {PageResult} from '@core/type/page-result';
+import {DiaryGroup} from '@core/type/diary-group';
 
 
 @Injectable({ providedIn: 'root' })
@@ -26,6 +27,11 @@ export class EntryRepository {
     await db.entries.where('id').equals(id).delete();
   }
 
+  /**
+   * -----------------------------
+   * PAGINATION
+   * -----------------------------
+   */
   async paginate(cursor: string | null): Promise<PageResult<Entry>> {
     let collection;
 
@@ -44,56 +50,66 @@ export class EntryRepository {
 
     const data: Entry[] = await collection.toArray();
 
-    if (data.length < this.PAGE_SIZE) {
-      return {
-        data,
-        nextCursor: null
-      };
-    }
+    const nextCursor = data.length < this.PAGE_SIZE
+      ? null
+      : data[data.length - 1].createdAt;
 
-    const nextCursor = data[data.length - 1].createdAt ?? null;
-
-    return {
-      data,
-      nextCursor
-    };
+    return { data, nextCursor };
   }
 
-/*
-  async search(query: string): Promise<DiaryEntry[]> {
+  /**
+   * -----------------------------
+   * SEARCH → returns grouped result
+   * -----------------------------
+   */
+  async search(query: string): Promise<DiaryGroup[]> {
     if (!query || query.trim().length < 3) return [];
 
-    query = query.toLowerCase();
+    const q = query.toLowerCase();
 
-    return db.entries.filter(entry =>
-      entry.title.toLowerCase().includes(query) ||
-      entry.content.toLowerCase().includes(query)
-    ).toArray();
+    const matches = await db.entries
+      .filter(entry => entry.content.toLowerCase().includes(q))
+      .toArray();
+
+    return this.groupByDate(matches);
   }
 
-  async groupByDate(entries: DiaryEntry[]): Promise<DiaryGroup[]> {
+  /**
+   * -----------------------------
+   * For pagination → grouping raw merged entries
+   * -----------------------------
+   */
+  groupEntriesForPaginate(entries: Entry[]): DiaryGroup[] {
+    return this.groupByDate(entries);
+  }
+
+  /**
+   * -----------------------------
+   * UNIVERSAL GROUPING FUNCTION
+   * -----------------------------
+   */
+  private groupByDate(entries: Entry[]): DiaryGroup[] {
     const groups: Record<string, DiaryGroup> = {};
 
     for (const entry of entries) {
-      const date = entry.createdAt.split('T')[0];
-      const display = new Date(date).toLocaleDateString('ru-RU', {
+      const dateObj = new Date(entry.createdAt);
+      const date = dateObj.toISOString().slice(0, 10);
+
+      const display = dateObj.toLocaleDateString('uk-UA', {
         day: 'numeric',
         month: 'long',
-        year: 'numeric'
+        year: 'numeric',
       });
 
       if (!groups[date]) {
-        groups[date] = {
-          date,
-          display,
-          entries: [],
-        };
+        groups[date] = { date, display, entries: [] };
       }
+
       groups[date].entries.push(entry);
     }
 
     return Object.values(groups).sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     );
-  }*/
+  }
 }

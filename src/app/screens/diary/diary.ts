@@ -2,17 +2,14 @@ import {Component, inject, OnInit, signal} from '@angular/core';
 import {Content} from "@app/components/grid/content/content";
 import {Navigation} from '@app/components/ui/navigation/navigation';
 import {Button} from '@app/components/ui/button/button';
-import {img} from '../../../shared/utils/helpers';
-
-import {faPlus, faSearch, faSpinner} from '@fortawesome/free-solid-svg-icons';
+import {img} from '@shared/utils/helpers';
+import {faPlus, faSearch} from '@fortawesome/free-solid-svg-icons';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
-import {DiaryEntry} from '@core/type/diary-entry';
 import {DiaryGroup} from '@core/type/diary-group';
 import {EntryRepository} from '@core/repository/entry.repository';
 import {Entries} from '@app/screens/diary/_parts/entries/entries';
 import {IntersectionObserverDirective} from '@core/directive/intersection-observer.directive';
 import {Entry} from '@core/db/db-tables';
-import {db} from '@core/db/db';
 import {Router} from '@angular/router';
 
 @Component({
@@ -31,76 +28,39 @@ import {Router} from '@angular/router';
 export class DiaryScreen implements OnInit {
 
   protected readonly img = img;
+  protected readonly router: Router = inject(Router);
+  protected readonly faSearch = faSearch;
+  protected readonly faPlus = faPlus;
 
-  private entryRepository: EntryRepository = inject(EntryRepository);
-  protected router: Router = inject(Router);
+  private readonly entryRepository = inject(EntryRepository);
 
-  isSearching = signal(false);
-  searching = signal('');
+  // -------- Component State --------
   loading = signal(false);
   reachedEnd = signal(false);
 
-  page = signal(1);
+  nextCursor: string | null = null;
 
-  allEntries = signal<Array<{
-    date: string;
-    display: string;
-    entry: Entry;
-  }>>([]);
+  /** Raw entries collected from pagination */
+  private rawEntries = signal<Entry[]>([]);
 
+  /** Final UI groups */
   items = signal<DiaryGroup[]>([]);
-
-  nextCursor: null | string = null;
 
   async ngOnInit(): Promise<void> {
     await this.loadMore();
   }
 
-  async toggleSearch() {
-    this.isSearching.update(v => !v);
-
-    if (!this.isSearching()) {
-      this.searching.set('');
-      await this.resetAndFetch();
-    }
+  goToSearch() {
+    this.router.navigate(['/diary/search']);
   }
 
-  async onSearchInput(value: string) {
-    this.searching.set(value);
-
-    if (value.length >= 5 || value.length === 0) {
-      await this.resetAndFetch();
-    }
-  }
-
-  groupEntries() {
-    const groups: Record<string, DiaryGroup> = {};
-
-    for (const item of this.allEntries()) {
-      if (!groups[item.date]) {
-        groups[item.date] = {
-          date: item.date,
-          display: item.display,
-          entries: [],
-        };
-      }
-
-      groups[item.date].entries.push(item.entry);
-    }
-
-    this.items.set(
-      Object.values(groups).sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-      )
-    );
-  }
-
+  /**
+   * Load next page
+   */
   async loadMore() {
     if (this.loading() || this.reachedEnd()) return;
 
     this.loading.set(true);
-
-    const search = this.searching().trim();
 
     const res = await this.entryRepository.paginate(this.nextCursor);
 
@@ -110,61 +70,40 @@ export class DiaryScreen implements OnInit {
       return;
     }
 
+    // Merge new entries with existing
+    const merged = [...this.rawEntries(), ...res.data];
+
+    this.rawEntries.set(merged);
+
+    // Build grouped structure
+    this.items.set(
+      this.entryRepository.groupEntriesForPaginate(merged)
+    );
+
     this.nextCursor = res.nextCursor;
 
     if (res.nextCursor === null) {
       this.reachedEnd.set(true);
     }
 
-    const newEntries: Array<{
-      date: string;
-      display: string;
-      entry: Entry;
-    }> = [];
-
-    for (const item of res.data) {
-      const date = item.createdAt.split('T')[0];
-
-      const display = new Date(date).toLocaleDateString('uk-UA', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      });
-
-      newEntries.push({
-        date,
-        display,
-        entry: item,
-      });
-    }
-
-    this.allEntries.set([...this.allEntries(), ...newEntries]);
-
-    this.groupEntries();
-
-    if (!search) {
-      this.page.update(p => p + 1);
-    }
-
     this.loading.set(false);
   }
 
+  /**
+   * Reset list (pull-to-refresh or search reset)
+   */
   async resetAndFetch() {
-    this.page.set(1);
-    this.reachedEnd.set(false);
-    this.allEntries.set([]);
+    this.rawEntries.set([]);
     this.items.set([]);
     this.nextCursor = null;
+    this.reachedEnd.set(false);
+
     await this.loadMore();
   }
 
   async onBottomReached() {
-    if (!this.loading() && !this.reachedEnd() && !this.isSearching()) {
+    if (!this.loading() && !this.reachedEnd()) {
       await this.loadMore();
     }
   }
-
-  protected readonly faSearch = faSearch;
-  protected readonly faSpinner = faSpinner;
-  protected readonly faPlus = faPlus;
 }

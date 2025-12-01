@@ -1,0 +1,26 @@
+<app-content>
+  <div header>
+    <app-back [url]="'/diary'"/>
+    <div class="screen__heading diary__heading">
+      Search
+    </div>
+  </div>
+  <div body>
+    <div class="diary__search">
+      <input
+        class="diary__search-control"
+        [value]="searching()"
+        (input)="onSearchInput($any($event.target).value)"
+        type="text"
+        placeholder="Search"
+      />
+    </div>
+
+    <app-entries [items]="items()"/>
+
+    @if (items().length === 0) {
+      <div class="p">Please typing some words...</div>
+    }
+
+  </div>
+</app-content>
