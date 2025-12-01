@@ -80,6 +80,7 @@ export class EntryScreen implements OnInit {
   async delete() {
     if (!this.isEdit()) return;
     await this.translateRepository.delete(this.id()!);
+    this.alert.show('Successfully deleted', 'success');
     await this.router.navigate(['/dictionary']);
   }
 }

@@ -2,20 +2,20 @@
   <div header>
     <div class="entry__header">
       <app-back [url]="'/diary'"/>
-      @if (isShowMode()) {
-        <div class="entry__header-actions">
-          <app-button
-            [type]="'link'"
-            (click)="onEdit()">
-            <fa-icon [icon]="faPencil"/>
-          </app-button>
-          <app-button
-            [type]="'link'"
-            (click)="onDelete()">
-            <fa-icon [icon]="faTrash"/>
-          </app-button>
-        </div>
-      }
+      <div class="entry__header-actions">
+        <app-button
+          [disabled]="!id()"
+          [type]="'link'"
+          (click)="onEdit()">
+          <fa-icon [icon]="faPencil"/>
+        </app-button>
+        <app-button
+          [disabled]="!id()"
+          [type]="'link'"
+          (click)="onDelete()">
+          <fa-icon [icon]="faTrash"/>
+        </app-button>
+      </div>
     </div>
   </div>
   <div body>

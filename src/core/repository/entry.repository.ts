@@ -22,44 +22,9 @@ export class EntryRepository {
     return await db.entries.get(id) ?? null;
   }
 
-  /*
-  async create(entry: {
-    title: string;
-    content: string;
-    mentorId: number;
-  }): Promise<number> {
-  // WITH TIMEZONE
-    const now = new Date().toISOString();
-
-    return db.entries.add({
-      uuid: uuidv4(),
-      mentorId: entry.mentorId,
-      title: entry.title,
-      content: entry.content,
-      analysis: null,
-      analysisStatus: 'none',
-      createdAt: now,
-    });
+  async delete(id: number): Promise<void> {
+    await db.entries.where('id').equals(id).delete();
   }
-
-  async update(uuid: string, update: Partial<DiaryEntry>) {
-    const now = new Date().toISOString();
-
-    await db.entries
-      .where('uuid')
-      .equals(uuid)
-      .modify({
-        ...update,
-        updatedAt: now,
-        updatedLocallyAt: now,
-        status: 'changed',
-      });
-  }
-
-  async delete(uuid: string): Promise<void> {
-    await db.entries.where('uuid').equals(uuid).delete();
-  }
-*/
 
   async paginate(cursor: number | null): Promise<PageResult<Entry>> {
     let collection;

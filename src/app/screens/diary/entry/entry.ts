@@ -116,6 +116,8 @@ export class EntryScreen implements OnInit {
         this.form.set({
           content: this.entry.content
         });
+      } else {
+        await this.router.navigate(['/diary']);
       }
     }
   }
@@ -134,13 +136,13 @@ export class EntryScreen implements OnInit {
     if (!user) return;
 
     try {
-      let id: number;
 
       if (!this.id()) {
+
         // ----------------------------
         // CREATE NEW ENTRY
         // ----------------------------
-        id = await this.repository.create(<Entry>{
+        const id: number = await this.repository.create(<Entry>{
           uuid: uuidv4(),
           mentorId: user.mentorId,
           content: this.form().content,
@@ -149,6 +151,8 @@ export class EntryScreen implements OnInit {
           updatedAt: null,
           analysisStatus: 'none'
         });
+
+        this.id.set(id);
 
       } else if (this.entry) {
         // ----------------------------
@@ -162,12 +166,11 @@ export class EntryScreen implements OnInit {
           updatedAt: DateTimePicker.toISOLocal(now())
         });
 
-        id = this.entry.id!;
         this.isShowMode.set(true);
       }
 
       this.alert.show('Successfully saved', 'success');
-      setTimeout(() => this.router.navigate([`/diary/entry/${id}`]), 500);
+      await this.router.navigate([`/diary/entry/${this.id()}`])
 
     } catch (e: any) {
       alert(e.toString());
@@ -182,7 +185,16 @@ export class EntryScreen implements OnInit {
       this.contentInput?.nativeElement?.focus();
     }, 0);
   }
-  onDelete() {}
+
+  async onDelete() {
+    const id: number | null = this.id();
+    if (id) {
+      await this.repository.delete(id);
+      this.alert.show('Successfully deleted', 'success');
+      await this.router.navigate([`/diary`])
+    }
+  }
+
   onAnalyze() {}
 
   onDateUpdated(newValue: string) {

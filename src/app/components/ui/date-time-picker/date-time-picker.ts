@@ -1,7 +1,8 @@
-import { Component, Input, Output, EventEmitter, signal, effect } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {Component, Input, Output, EventEmitter, signal, OnChanges, SimpleChanges, effect} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
-import {faCalendar, faSortDown} from '@fortawesome/free-solid-svg-icons';
+import {faCalendar} from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-date-time-picker',
   standalone: true,
@@ -9,9 +10,8 @@ import {faCalendar, faSortDown} from '@fortawesome/free-solid-svg-icons';
   templateUrl: './date-time-picker.html',
   styleUrls: ['./date-time-picker.scss']
 })
-export class DateTimePicker {
+export class DateTimePicker implements OnChanges {
   protected readonly faCalendar = faCalendar;
-  protected readonly faSortDown = faSortDown;
 
   // -------------------------
   // Inputs
@@ -35,6 +35,12 @@ export class DateTimePicker {
         this.datetime.set(this.value);
       }
     });
+  }
+
+  ngOnChanges() {
+    if (this.value) {
+      this.datetime.set(this.value);
+    }
   }
 
   // Format helper (optional)
