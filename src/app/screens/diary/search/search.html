@@ -6,21 +6,23 @@
     </div>
   </div>
   <div body>
-    <div class="diary__search">
-      <input
-        class="diary__search-control"
-        [value]="searching()"
-        (input)="onSearchInput($any($event.target).value)"
-        type="text"
-        placeholder="Search"
-      />
+
+    <div class="virtual-scroll-box">
+      <div class="diary__search">
+        <input
+          class="diary__search-control"
+          [value]="searching()"
+          (input)="onSearchInput($any($event.target).value)"
+          type="text"
+          placeholder="Search"
+        />
+      </div>
+
+      <app-entries [items]="items()"/>
+
+      @if (items().length === 0) {
+        <div class="p">Please typing some words...</div>
+      }
     </div>
-
-    <app-entries [items]="items()"/>
-
-    @if (items().length === 0) {
-      <div class="p">Please typing some words...</div>
-    }
-
   </div>
 </app-content>
