@@ -1,6 +1,6 @@
 @if (items.length) {
 <div class="diary__items">
-  @for (item of items; track item.date) {
+  @for (item of items; track $index) {
     <div class="diary__item">
 
       <div class="diary__item-date">

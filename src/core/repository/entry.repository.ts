@@ -8,7 +8,7 @@ import {PageResult} from '@core/type/page-result';
 @Injectable({ providedIn: 'root' })
 export class EntryRepository {
 
-  PAGE_SIZE = 10;
+  PAGE_SIZE = 4;
 
   async create(item: Entry): Promise<number> {
     return db.entries.add(item);
@@ -26,17 +26,17 @@ export class EntryRepository {
     await db.entries.where('id').equals(id).delete();
   }
 
-  async paginate(cursor: number | null): Promise<PageResult<Entry>> {
+  async paginate(cursor: string | null): Promise<PageResult<Entry>> {
     let collection;
 
     if (cursor === null) {
       collection = db.entries
-        .orderBy('id')
+        .orderBy('createdAt')
         .reverse()
         .limit(this.PAGE_SIZE);
     } else {
       collection = db.entries
-        .where('id')
+        .where('createdAt')
         .below(cursor)
         .reverse()
         .limit(this.PAGE_SIZE);
@@ -51,7 +51,7 @@ export class EntryRepository {
       };
     }
 
-    const nextCursor = data[data.length - 1].id ?? null;
+    const nextCursor = data[data.length - 1].createdAt ?? null;
 
     return {
       data,

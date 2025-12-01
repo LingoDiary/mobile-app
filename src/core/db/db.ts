@@ -17,7 +17,7 @@ export class Db extends Dexie {
     this.version(1).stores({
       users: '++id',
       translates: '++id',
-      entries: `++id`,
+      entries: `++id, createdAt`,
     });
 
     this.on('populate', () => {

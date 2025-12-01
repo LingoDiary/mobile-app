@@ -50,7 +50,7 @@ export class DiaryScreen implements OnInit {
 
   items = signal<DiaryGroup[]>([]);
 
-  nextCursor: null | number = null;
+  nextCursor: null | string = null;
 
   async ngOnInit(): Promise<void> {
     await this.loadMore();
@@ -110,6 +110,12 @@ export class DiaryScreen implements OnInit {
       return;
     }
 
+    this.nextCursor = res.nextCursor;
+
+    if (res.nextCursor === null) {
+      this.reachedEnd.set(true);
+    }
+
     const newEntries: Array<{
       date: string;
       display: string;
@@ -148,6 +154,7 @@ export class DiaryScreen implements OnInit {
     this.reachedEnd.set(false);
     this.allEntries.set([]);
     this.items.set([]);
+    this.nextCursor = null;
     await this.loadMore();
   }
 
