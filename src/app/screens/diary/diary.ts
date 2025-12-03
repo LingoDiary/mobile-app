@@ -1,5 +1,4 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {Content} from "@app/components/grid/content/content";
 import {Navigation} from '@app/components/ui/navigation/navigation';
 import {Button} from '@app/components/ui/button/button';
 import {img} from '@shared/utils/helpers';
@@ -11,16 +10,17 @@ import {Entries} from '@app/screens/diary/_parts/entries/entries';
 import {IntersectionObserverDirective} from '@core/directive/intersection-observer.directive';
 import {Entry} from '@core/db/db-tables';
 import {Router} from '@angular/router';
+import {Viewport} from '@app/components/viewport/viewport';
 
 @Component({
   selector: 'app-diary-screen',
   imports: [
-    Content,
     Navigation,
     Button,
     FaIconComponent,
     Entries,
-    IntersectionObserverDirective
+    IntersectionObserverDirective,
+    Viewport
   ],
   templateUrl: './diary.html',
   styleUrl: './diary.scss',
@@ -38,7 +38,7 @@ export class DiaryScreen implements OnInit {
   loading = signal(false);
   reachedEnd = signal(false);
 
-  nextCursor: string | null = null;
+  nextCursor: string | number | null = null;
 
   /** Raw entries collected from pagination */
   private rawEntries = signal<Entry[]>([]);
@@ -55,14 +55,17 @@ export class DiaryScreen implements OnInit {
   }
 
   /**
-   * Load next page
+   * Load next batch of entries with unified fetch()
    */
   async loadMore() {
     if (this.loading() || this.reachedEnd()) return;
 
     this.loading.set(true);
 
-    const res = await this.entryRepository.paginate(this.nextCursor);
+    const res = await this.entryRepository.fetch({
+      cursor: this.nextCursor,
+      search: null,            // diary имеет обычную пагинацию
+    });
 
     if (res.data.length === 0) {
       this.reachedEnd.set(true);
@@ -70,19 +73,16 @@ export class DiaryScreen implements OnInit {
       return;
     }
 
-    // Merge new entries with existing
     const merged = [...this.rawEntries(), ...res.data];
-
     this.rawEntries.set(merged);
 
-    // Build grouped structure
     this.items.set(
       this.entryRepository.groupEntriesForPaginate(merged)
     );
 
     this.nextCursor = res.nextCursor;
 
-    if (res.nextCursor === null) {
+    if (!res.nextCursor) {
       this.reachedEnd.set(true);
     }
 
@@ -90,17 +90,8 @@ export class DiaryScreen implements OnInit {
   }
 
   /**
-   * Reset list (pull-to-refresh or search reset)
+   * Reset pagination completely (pull-to-refresh)
    */
-  async resetAndFetch() {
-    this.rawEntries.set([]);
-    this.items.set([]);
-    this.nextCursor = null;
-    this.reachedEnd.set(false);
-
-    await this.loadMore();
-  }
-
   async onBottomReached() {
     if (!this.loading() && !this.reachedEnd()) {
       await this.loadMore();

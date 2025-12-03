@@ -1,4 +1,4 @@
-<app-content>
+<app-viewport>
   <div header>
     <app-back [url]="'/diary'"/>
     <div class="screen__heading diary__heading">
@@ -6,23 +6,32 @@
     </div>
   </div>
   <div body>
+    <div class="search">
+      <input
+        class="search__control"
+        [value]="searching()"
+        (input)="onSearchInput($any($event.target).value)"
+        type="text"
+        placeholder="Search"
+      />
+      <div class="search__box">
+        <div class="virtual-scroll-box">
+          <app-entries [items]="items()"/>
+          @if (!reachedEnd()) {
+            <div
+              class="observer-trigger"
+              appIntersectionObserver
+              (visible)="onBottomReached()"
+            ></div>
+          }
+          @if (!items().length) {
+            <div class="p">Please typing some words...</div>
+          }
 
-    <div class="virtual-scroll-box">
-      <div class="diary__search">
-        <input
-          class="diary__search-control"
-          [value]="searching()"
-          (input)="onSearchInput($any($event.target).value)"
-          type="text"
-          placeholder="Search"
-        />
+        </div>
+
       </div>
-
-      <app-entries [items]="items()"/>
-
-      @if (items().length === 0) {
-        <div class="p">Please typing some words...</div>
-      }
     </div>
+
   </div>
-</app-content>
+</app-viewport>

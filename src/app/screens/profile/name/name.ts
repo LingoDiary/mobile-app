@@ -1,19 +1,19 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {Content} from "@app/components/grid/content/content";
 import {Button} from '@app/components/ui/button/button';
 import {Name as NameFeature} from '@app/features/name/name'
 import {UserRepository} from '@core/repository/user.repository';
 import {AlertService} from '@app/core/services/alert/alert';
 import {Back} from '@app/components/ui/back/back';
 import {NestedChildActions} from '@shared/classes/nested-child-actions';
+import {Viewport} from '@app/components/viewport/viewport';
 
 @Component({
   selector: 'app-name-screen',
   imports: [
-    Content,
     Button,
     NameFeature,
-    Back
+    Back,
+    Viewport
   ],
   templateUrl: './name.html',
   styleUrl: './name.scss',

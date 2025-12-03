@@ -5,16 +5,16 @@ import {AlertService} from '@app/core/services/alert/alert';
 import {HoursTimes} from '@core/type/hours-times';
 import {Back} from '@app/components/ui/back/back';
 import {Button} from '@app/components/ui/button/button';
-import {Content} from '@app/components/grid/content/content';
 import {Reminder as ReminderFeature} from '@app/features/reminder/reminder';
+import {Viewport} from '@app/components/viewport/viewport';
 
 @Component({
   selector: 'app-reminder-screen',
   imports: [
     Back,
     Button,
-    Content,
-    ReminderFeature
+    ReminderFeature,
+    Viewport
   ],
   templateUrl: './reminder.html',
   styleUrl: './reminder.scss',

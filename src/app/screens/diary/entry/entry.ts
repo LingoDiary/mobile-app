@@ -1,13 +1,11 @@
-import {Component, Input, signal, computed, effect, inject, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, signal, computed, effect, inject, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { NgClass } from '@angular/common';
-import {Content} from '@app/components/grid/content/content';
 import {Back} from '@app/components/ui/back/back';
 import {FormsModule} from '@angular/forms';
 import {
   faCheck,
   faPencil,
   faPlus,
-  faSave,
   faSearch,
   faTrash,
   faWandMagicSparkles
@@ -18,15 +16,16 @@ import {now} from '@shared/utils/helpers';
 import {DateTimePicker} from '@app/components/ui/date-time-picker/date-time-picker';
 import {EntryRepository} from '@core/repository/entry.repository';
 import {UserRepository} from '@core/repository/user.repository';
-import {Entry, User} from '@core/db/db-tables';
+import {Entry} from '@core/db/db-tables';
 import { v4 as uuidv4 } from 'uuid';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AlertService} from '@app/core/services/alert/alert';
+import {Viewport} from '@app/components/viewport/viewport';
 
 @Component({
   selector: 'app-entry-form',
   standalone: true,
-  imports: [NgClass, Content, Back, FormsModule, FaIconComponent, Button, DateTimePicker],
+  imports: [NgClass, Back, FormsModule, FaIconComponent, Button, DateTimePicker, Viewport],
   templateUrl: './entry.html',
   styleUrls: ['./entry.scss']
 })

@@ -1,43 +1,44 @@
-import { Injectable } from '@angular/core';
-import { db } from '@core/db/db';
-import { Translate } from '@core/db/db-tables';
-
-export interface PageResult<T> {
-  data: T[];
-  nextCursor: number | null;
-}
+import { Injectable, inject } from '@angular/core';
+import { SQLiteService } from '../db/sqlite.service';
+import { Translate } from '../db/db-tables';
+import {PageResult} from '@core/type/page-result';
 
 @Injectable({ providedIn: 'root' })
 export class TranslateRepository {
 
+  private sqlite = inject(SQLiteService);
   PAGE_SIZE = 10;
 
-  async paginate(cursor: number | null): Promise<PageResult<Translate>> {
-    let collection;
+  /** Paginate by ID (cursor style) */
+  async paginate(cursor: string | number | null): Promise<PageResult<Translate>> {
+    let sql: string;
+    let params: any[];
 
     if (cursor === null) {
-      collection = db.translates
-        .orderBy('id')
-        .reverse()
-        .limit(this.PAGE_SIZE);
+      // first page
+      sql = `
+        SELECT * FROM translates
+        ORDER BY id DESC
+        LIMIT ?
+      `;
+      params = [this.PAGE_SIZE];
     } else {
-      collection = db.translates
-        .where('id')
-        .below(cursor)
-        .reverse()
-        .limit(this.PAGE_SIZE);
+      // next pages
+      sql = `
+        SELECT * FROM translates
+        WHERE id < ?
+        ORDER BY id DESC
+        LIMIT ?
+      `;
+      params = [cursor, this.PAGE_SIZE];
     }
 
-    const data: Translate[] = await collection.toArray();
+    const result = await this.sqlite.query(sql, params);
+    const data = result.values ?? [];
 
-    if (data.length < this.PAGE_SIZE) {
-      return {
-        data,
-        nextCursor: null
-      };
-    }
-
-    const nextCursor = data[data.length - 1].id ?? null;
+    // next cursor
+    const nextCursor =
+      data.length < this.PAGE_SIZE ? null : data[data.length - 1].id;
 
     return {
       data,
@@ -45,20 +46,54 @@ export class TranslateRepository {
     };
   }
 
+  /** Create new translate */
   async create(item: Translate): Promise<void> {
-    await db.translates.put(item);
+    const sql = `
+      INSERT INTO translates (phrase, translation, createdAt, updatedAt)
+      VALUES (?, ?, ?, ?)
+    `;
+
+    await this.sqlite.run(sql, [
+      item.phrase,
+      item.translation,
+      item.createdAt,
+      item.updatedAt
+    ]);
   }
 
+  /** Find by id */
   async findById(id: number) {
-    return db.translates.get(id);
+    const result = await this.sqlite.query(
+      `SELECT * FROM translates WHERE id = ? LIMIT 1`,
+      [id]
+    );
+
+    if (!result.values || result.values.length === 0) {
+      return null;
+    }
+
+    return result.values[0] as Translate;
   }
 
-  async update(data: Translate) {
-    await db.translates.put(data);
+  /** Update translate */
+  async update(item: Translate) {
+    const sql = `
+      UPDATE translates
+      SET phrase = ?, translation = ?, createdAt = ?, updatedAt = ?
+      WHERE id = ?
+    `;
+
+    await this.sqlite.run(sql, [
+      item.phrase,
+      item.translation,
+      item.createdAt,
+      item.updatedAt,
+      item.id
+    ]);
   }
 
+  /** Delete translate */
   async delete(id: number) {
-    await db.translates.delete(id);
+    await this.sqlite.run(`DELETE FROM translates WHERE id = ?`, [id]);
   }
-
 }

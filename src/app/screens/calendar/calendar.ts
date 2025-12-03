@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import {Content} from "@app/components/grid/content/content";
 import {Navigation} from "@app/components/ui/navigation/navigation";
-import {img} from '../../../shared/utils/helpers';
-import {DiaryScreen} from '@app/screens/diary/diary';
+import {img} from '@shared/utils/helpers';
+import {Viewport} from '@app/components/viewport/viewport';
 
 @Component({
   selector: 'app-calendar-screen',
-    imports: [
-        Content,
-        Navigation
-    ],
+  imports: [
+    Navigation,
+    Viewport
+  ],
   templateUrl: './calendar.html',
   styleUrl: './calendar.scss',
 })

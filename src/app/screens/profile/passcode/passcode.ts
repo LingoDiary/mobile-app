@@ -1,16 +1,16 @@
 import {Component, inject, computed, ViewChild} from '@angular/core';
 import { Button } from '@app/components/ui/button/button';
-import { Content } from '@app/components/grid/content/content';
 import { Passcode as PasscodeFeature } from '@app/features/passcode/passcode';
 import { AlertService } from '@app/core/services/alert/alert';
 import { img } from '@shared/utils/helpers';
 import {UserRepository} from '@core/repository/user.repository';
 import {Back} from '@app/components/ui/back/back';
 import {NestedChildActions} from '@shared/classes/nested-child-actions';
+import {Viewport} from '@app/components/viewport/viewport';
 
 @Component({
   selector: 'app-passcode-screen',
-  imports: [Button, Content, PasscodeFeature, Back],
+  imports: [Button, PasscodeFeature, Back, Viewport],
   templateUrl: './passcode.html',
   styleUrl: './passcode.scss',
 })

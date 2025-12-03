@@ -1,6 +1,5 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {img} from '@shared/utils/helpers';
-import {Content} from '@app/components/grid/content/content';
 import {Button} from '@app/components/ui/button/button';
 import {Mentors} from '@app/features/mentors/mentors';
 import {NgClass} from '@angular/common';
@@ -13,11 +12,11 @@ import {UserDTO} from '@core/dto/user.dto';
 import {UserRepository} from '@core/repository/user.repository';
 import {Router} from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
+import {Viewport} from '@app/components/viewport/viewport';
 
 @Component({
   selector: 'app-onboarding-screen',
   imports: [
-    Content,
     Button,
     Mentors,
     NgClass,
@@ -26,6 +25,7 @@ import { v4 as uuidv4 } from 'uuid';
     LanguageLevels,
     Passcode,
     Reminder,
+    Viewport,
   ],
   templateUrl: './onboarding.html',
   styleUrl: './onboarding.scss',

@@ -2,19 +2,18 @@ import {Component, inject, OnInit} from '@angular/core';
 import {NestedChildActions} from '@shared/classes/nested-child-actions';
 import {Back} from '@app/components/ui/back/back';
 import {Button} from '@app/components/ui/button/button';
-import {Content} from '@app/components/grid/content/content';
 import {UserRepository} from '@core/repository/user.repository';
 import {AlertService} from '@app/core/services/alert/alert';
 import {NativeLanguages} from '@app/features/native-languages/native-languages';
-import {DiaryScreen} from '@app/screens/diary/diary';
+import {Viewport} from '@app/components/viewport/viewport';
 
 @Component({
   selector: 'app-native-language-screen',
   imports: [
     Back,
     Button,
-    Content,
-    NativeLanguages
+    NativeLanguages,
+    Viewport
   ],
   templateUrl: './native-language.html',
   styleUrl: './native-language.scss',

@@ -1,5 +1,4 @@
-<app-content>
-
+<app-viewport>
   <div header>
     <div class="screen__heading diary__heading">
       Diary
@@ -13,38 +12,37 @@
       }
     </div>
   </div>
-
   <div body>
+    <div class="diary">
+      <div class="virtual-scroll-box">
+        <app-entries
+          class="diary__items"
+          [items]="items()"
+          (loadMore)="onBottomReached()"
+        />
 
-    <div class="virtual-scroll-box">
-      <app-entries
-        [items]="items()"
-        (loadMore)="onBottomReached()"
-      />
+        @if (!reachedEnd()) {
+          <div
+            class="observer-trigger"
+            appIntersectionObserver
+            (visible)="onBottomReached()"
+          ></div>
+        }
 
-      @if (!reachedEnd()) {
-        <div
-          class="observer-trigger"
-          appIntersectionObserver
-          (visible)="onBottomReached()"
-        >
+        @if (items().length === 0 && reachedEnd()) {
+          <div class="p">Not found</div>
+        }
+
+        <div class="screen__action">
+          <app-button (click)="router.navigate(['diary/entry'])">
+            <fa-icon [icon]="faPlus"/>
+          </app-button>
         </div>
-      }
-
-      @if (items().length === 0 && reachedEnd()) {
-        <div class="p">Not found</div>
-      }
-    </div>
-
-    <div class="screen__action">
-      <app-button (click)="router.navigate(['diary/entry'])">
-        <fa-icon [icon]="faPlus"/>
-      </app-button>
+      </div>
     </div>
   </div>
 
   <div navigation>
     <app-navigation/>
   </div>
-
-</app-content>
+</app-viewport>

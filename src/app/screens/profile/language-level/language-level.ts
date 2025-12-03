@@ -4,17 +4,16 @@ import {UserRepository} from '@core/repository/user.repository';
 import {AlertService} from '@app/core/services/alert/alert';
 import {Back} from '@app/components/ui/back/back';
 import {Button} from '@app/components/ui/button/button';
-import {Content} from '@app/components/grid/content/content';
 import {LanguageLevels} from '@app/features/language-level/language-levels';
-import {DiaryScreen} from '@app/screens/diary/diary';
+import {Viewport} from '@app/components/viewport/viewport';
 
 @Component({
   selector: 'app-language-level-screen',
   imports: [
     Back,
     Button,
-    Content,
-    LanguageLevels
+    LanguageLevels,
+    Viewport
   ],
   templateUrl: './language-level.html',
   styleUrl: './language-level.scss',

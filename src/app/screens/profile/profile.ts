@@ -1,17 +1,17 @@
 import {Component} from '@angular/core';
-import {Content} from "@app/components/grid/content/content";
 import {Navigation} from "@app/components/ui/navigation/navigation";
 import {FontAwesomeModule, IconDefinition} from '@fortawesome/angular-fontawesome';
 import {faPencil, faLock, faUserTie, faLanguage, faArrowUpWideShort, faMoneyBill, faBell, faHeadset} from '@fortawesome/free-solid-svg-icons';
 import {RouterLink} from '@angular/router';
+import {Viewport} from '@app/components/viewport/viewport';
 
 @Component({
   selector: 'app-profile-screen',
   imports: [
-    Content,
     Navigation,
     FontAwesomeModule,
-    RouterLink
+    RouterLink,
+    Viewport
   ],
   templateUrl: './profile.html',
   styleUrl: './profile.scss',

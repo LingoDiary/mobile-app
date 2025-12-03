@@ -1,20 +1,20 @@
 import {Component, OnInit, inject, signal, computed} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateRepository} from '@core/repository/translate.repository';
-import {Content} from '@app/components/grid/content/content';
 import {Navigation} from '@app/components/ui/navigation/navigation';
 import {Button} from '@app/components/ui/button/button';
 import {Back} from '@app/components/ui/back/back';
 import {AlertService} from '@app/core/services/alert/alert';
+import {Viewport} from '@app/components/viewport/viewport';
 
 @Component({
   selector: 'app-entry',
   standalone: true,
   imports: [
-    Content,
     Navigation,
     Button,
-    Back
+    Back,
+    Viewport
   ],
   templateUrl: './entry.html',
   styleUrl: './entry.scss',
