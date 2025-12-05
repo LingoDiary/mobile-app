@@ -47,7 +47,7 @@ export class SearchScreen {
     this.reachedEnd.set(false);
     this.nextCursor = null;
 
-    if (value.length >= 1) {
+    if (value.length >= 3) {
       await this.loadMore();
     }
   }

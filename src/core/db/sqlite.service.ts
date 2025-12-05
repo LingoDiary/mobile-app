@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Capacitor } from '@capacitor/core';
 import {
   CapacitorSQLite,
   SQLiteConnection,
@@ -18,11 +17,6 @@ export class SQLiteService {
   }
 
   async init() {
-    const platform = Capacitor.getPlatform();
-
-    if (platform === 'web') {
-      await CapacitorSQLite.initWebStore();
-    }
 
     this.db = await this.sqlite.createConnection(
       'LingoDiaryDB',

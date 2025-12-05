@@ -30,7 +30,9 @@ export class EntryRepository {
       item.updatedAt
     ]);
 
-    return res.changes?.lastId ?? 0;
+    const typedResult = res as { changes?: { lastId: number, changes: number } };
+
+    return typedResult.changes?.lastId ?? 0;
   }
 
   /** Update fields by id */

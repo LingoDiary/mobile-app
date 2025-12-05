@@ -52,7 +52,7 @@ export class EntryScreen implements OnInit {
   //  Constants
   // -------------------------
   maxLength = 1000;
-  minContentLength = 100;
+  minContentLength = 1;
 
   // -------------------------
   //  Form State (signals)
