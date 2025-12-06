@@ -1,22 +1,18 @@
 <app-viewport>
   <div header>
-    <app-back [url]="'/diary'"/>
+    <app-back [url]="'/dictionary'"/>
     <div class="screen__heading diary__heading">
       Search
     </div>
-    <div class="search__group">
-      <input
-        class="search__control"
-        [value]="searching()"
-        (input)="onSearchInput($any($event.target).value)"
-        type="text"
-        placeholder="Search"
-      />
+    <div class="search__head">
+      Found <b>"{{ phrase() }}"</b>
     </div>
   </div>
+
   <div body>
     <div class="search" (scroll)="onScroll($event)">
       <div class="virtual-scroll-box">
+
         <app-entries
           [items]="items()"
           [useVirtualScroll]="false"
@@ -26,8 +22,8 @@
           <div class="loader">Loading...</div>
         }
 
-        @if (!items().length) {
-          <div class="p">Please typing some words...</div>
+        @if (!items().length && !loading()) {
+          <div class="p">No results...</div>
         }
 
       </div>

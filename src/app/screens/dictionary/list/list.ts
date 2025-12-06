@@ -37,7 +37,8 @@ export class ListScreen implements OnInit {
   reachedEnd = signal(false);
   loading = signal(false);
 
-  nextCursor: string | number | null = null;
+
+  nextCursor: string | null = null;
 
   async ngOnInit(): Promise<void> {
     await this.loadMore();

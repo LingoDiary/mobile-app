@@ -7,7 +7,6 @@ import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {DiaryGroup} from '@core/type/diary-group';
 import {EntryRepository} from '@core/repository/entry.repository';
 import {Entries} from '@app/screens/diary/_parts/entries/entries';
-import {IntersectionObserverDirective} from '@core/directive/intersection-observer.directive';
 import {Entry} from '@core/db/db-tables';
 import {Router} from '@angular/router';
 import {Viewport} from '@app/components/viewport/viewport';
@@ -19,8 +18,7 @@ import {Viewport} from '@app/components/viewport/viewport';
     Button,
     FaIconComponent,
     Entries,
-    IntersectionObserverDirective,
-    Viewport
+    Viewport,
   ],
   templateUrl: './diary.html',
   styleUrl: './diary.scss',
@@ -38,7 +36,8 @@ export class DiaryScreen implements OnInit {
   loading = signal(false);
   reachedEnd = signal(false);
 
-  nextCursor: string | number | null = null;
+
+  nextCursor: string | null = null;
 
   /** Raw entries collected from pagination */
   private rawEntries = signal<Entry[]>([]);
@@ -64,8 +63,10 @@ export class DiaryScreen implements OnInit {
 
     const res = await this.entryRepository.fetch({
       cursor: this.nextCursor,
-      search: null,            // diary имеет обычную пагинацию
+      search: null,
     });
+
+    console.log(this.nextCursor);
 
     if (res.data.length === 0) {
       this.reachedEnd.set(true);

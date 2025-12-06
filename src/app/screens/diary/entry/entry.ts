@@ -30,10 +30,6 @@ import {Viewport} from '@app/components/viewport/viewport';
   styleUrls: ['./entry.scss']
 })
 export class EntryScreen implements OnInit {
-
-
-  protected readonly faSearch = faSearch;
-  protected readonly faPlus = faPlus;
   protected readonly faCheck = faCheck;
   protected readonly now = now;
 
@@ -52,7 +48,7 @@ export class EntryScreen implements OnInit {
   //  Constants
   // -------------------------
   maxLength = 1000;
-  minContentLength = 1;
+  minContentLength = 100;
 
   // -------------------------
   //  Form State (signals)

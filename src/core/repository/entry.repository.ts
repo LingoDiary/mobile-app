@@ -76,74 +76,60 @@ export class EntryRepository {
    */
   async fetch(
     { cursor = null, search = null, limit = this.PAGE_SIZE }:
-    { cursor?: number | string | null; search?: string | null; limit?: number }
+    { cursor?: string | null; search?: string | null; limit?: number }
   ): Promise<PageResult<Entry>> {
 
-    //
-    // SEARCH MODE (full scan + slice)
-    //
-    if (search && search.trim().length >= 3) {
-      const q = `%${search.toLowerCase()}%`;
+    const limitPlusOne = limit + 1;
 
-      // get all matches (sorted desc)
-      const res = await this.sqlite.query(
-        `
-          SELECT * FROM entries
-          WHERE LOWER(content) LIKE ?
-          ORDER BY createdAt DESC
-        `,
-        [q]
-      );
+    const params: any[] = [];
+    const where: string[] = [];
 
-      let matches: Entry[] = res.values ?? [];
-
-      // cursor logic: skip until createdAt matches cursor
-      if (cursor) {
-        const idx = matches.findIndex(e => e.createdAt === String(cursor));
-        if (idx >= 0) {
-          matches = matches.slice(idx + 1);
-        }
-      }
-
-      const data = matches.slice(0, limit);
-
-      const nextCursor =
-        data.length < limit ? null : data[data.length - 1].createdAt;
-
-      return { data, nextCursor };
+    // SEARCH FILTER
+    if (search && search.trim()) {
+      where.push("LOWER(content) LIKE ?");
+      params.push(`%${search.toLowerCase()}%`);
     }
 
-    //
-    // PAGINATION MODE — fast SQL (cursor by createdAt desc)
-    //
-    let sql: string;
-    let params: any[];
-
-    if (!cursor) {
-      sql = `
-        SELECT * FROM entries
-        ORDER BY createdAt DESC
-        LIMIT ?
-      `;
-      params = [limit];
-    } else {
-      sql = `
-        SELECT * FROM entries
-        WHERE createdAt < ?
-        ORDER BY createdAt DESC
-        LIMIT ?
-      `;
-      params = [cursor, limit];
+    // CURSOR FILTER (shared for both search & diary)
+    if (cursor) {
+      where.push("createdAt < ?");
+      params.push(cursor);
     }
 
-    const result = await this.sqlite.query(sql, params);
-    const data = result.values ?? [];
+    let sql = `
+    SELECT * FROM entries
+  `;
 
-    const nextCursor =
-      data.length < limit ? null : data[data.length - 1].createdAt;
+    if (where.length > 0) {
+      sql += " WHERE " + where.join(" AND ");
+    }
 
-    return { data, nextCursor };
+    sql += `
+    ORDER BY createdAt DESC
+    LIMIT ?
+  `;
+
+    params.push(limitPlusOne);
+
+    const res = await this.sqlite.query(sql, params);
+
+    let rows = res.values ?? [];
+
+    const hasMore = rows.length > limit;
+
+    if (hasMore) {
+      rows = rows.slice(0, limit);
+    }
+
+    const nextCursor = hasMore
+      ? rows[rows.length - 1].createdAt
+      : null;
+
+    console.log(hasMore);
+
+    return { data: rows, nextCursor };
   }
+
 
   /** Grouping for pagination (UI-friendly format) */
   groupEntriesForPaginate(entries: Entry[]): DiaryGroup[] {

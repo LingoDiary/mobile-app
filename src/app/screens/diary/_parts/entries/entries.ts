@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DiaryGroup } from '@core/type/diary-group';
 import { formatTime } from '@shared/utils/helpers';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-entries',
@@ -14,16 +14,48 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 export class Entries {
   @Input({ required: true }) items!: DiaryGroup[];
 
+  /**
+   * Виртуальный скролл нужен только в дневнике.
+   * В поиске и словаре он мешает.
+   */
+  @Input() useVirtualScroll = false;
+
+  /** Только дневник подписывается на это событие */
   @Output() loadMore = new EventEmitter<void>();
 
   protected readonly formatTime = formatTime;
 
+  private lastIndex = 0;
+  private initialFired = false;
+
   trackGroup = (index: number, item: DiaryGroup) => item.date;
 
-  onScroll(index: number) {
-    const total = this.items.length;
+  /**
+   * Используется только в режиме виртуального скролла (дневник)
+   */
+  onVirtualScroll(index: number) {
+    if (!this.useVirtualScroll) return;
 
-    if (index > total - 6) {
+    const total = this.items.length;
+    if (total === 0) return;
+
+    // первое событие от CDK при инициализации — игнорируем
+    if (!this.initialFired) {
+      this.initialFired = true;
+      this.lastIndex = index;
+      return;
+    }
+
+    // интересует только скролл ВНИЗ
+    if (index <= this.lastIndex) {
+      this.lastIndex = index;
+      return;
+    }
+
+    this.lastIndex = index;
+
+    // если подходим к концу — просим подгрузку
+    if (index >= total - 3) {
       this.loadMore.emit();
     }
   }

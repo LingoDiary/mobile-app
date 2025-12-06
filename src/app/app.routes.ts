@@ -38,6 +38,10 @@ export const routes: Routes = [
     loadComponent: () => import('app/screens/dictionary/entry/entry').then(m => m.EntryScreen),
   },
   {
+    path: 'dictionary/search',
+    loadComponent: () => import('app/screens/dictionary/search/search').then(m => m.SearchScreen),
+  },
+  {
     path: 'profile',
     loadComponent: () => import('app/screens/profile/profile').then(m => m.ProfileScreen),
   },

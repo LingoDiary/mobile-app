@@ -1,8 +1,12 @@
 .search {
-  display: grid;
-  grid-template-rows: 2.5rem 1fr;
-  gap: 1rem;
-  height: 100%;
+  position: relative;
+  padding: 0 1rem;
+  height: calc(100vh - 12.5rem);
+  overflow: auto;
+
+  &__group {
+    display: flex;
+  }
 
   &__control {
     border-radius: var(--border-radius);
@@ -11,9 +15,5 @@
     height: 2.2rem;
     padding: 0 1rem;
     outline: none;
-  }
-
-  &__box {
-    position: relative;
   }
 }

@@ -1,12 +1,10 @@
 import {Component, inject, signal} from '@angular/core';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import {Back} from '@app/components/ui/back/back';
 import {EntryRepository} from '@core/repository/entry.repository';
 import {Entry} from '@core/db/db-tables';
 import {DiaryGroup} from '@core/type/diary-group';
 import {Entries} from '@app/screens/diary/_parts/entries/entries';
 import {Viewport} from '@app/components/viewport/viewport';
-import {IntersectionObserverDirective} from '@core/directive/intersection-observer.directive';
 
 @Component({
   selector: 'app-search',
@@ -14,14 +12,12 @@ import {IntersectionObserverDirective} from '@core/directive/intersection-observ
     Back,
     Entries,
     Viewport,
-    IntersectionObserverDirective,
   ],
   templateUrl: './search.html',
   styleUrl: './search.scss',
 })
 export class SearchScreen {
 
-  protected readonly faSearch = faSearch;
   private entryRepository: EntryRepository = inject(EntryRepository);
 
   searching = signal('');
@@ -30,7 +26,10 @@ export class SearchScreen {
   loading = signal(false);
   reachedEnd = signal(false);
 
-  nextCursor: string | number | null = null;
+
+  nextCursor: string | null = null;
+
+  queryStep: number = 1;
 
   /** Raw entries collected from pagination */
   private rawEntries = signal<Entry[]>([]);
@@ -62,6 +61,8 @@ export class SearchScreen {
       search: this.searching(),
     });
 
+    this.queryStep++;
+
     if (res.data.length === 0) {
       this.reachedEnd.set(true);
       this.loading.set(false);
@@ -85,8 +86,13 @@ export class SearchScreen {
     this.loading.set(false);
   }
 
-  async onBottomReached() {
-    if (!this.loading() && !this.reachedEnd() && this.searching().length >= 1) {
+  async onScroll(event: Event) {
+    if (this.loading() || this.reachedEnd()) return;
+
+    const el = event.target as HTMLElement;
+    const offset = el.scrollHeight - el.scrollTop - el.clientHeight;
+
+    if (offset < 200) {
       await this.loadMore();
     }
   }

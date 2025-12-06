@@ -23,6 +23,12 @@ export class App implements OnInit {
     try {
       await this.sqlite.init();
 
+      const rows = await this.sqlite.query(
+        'SELECT id, createdAt FROM entries ORDER BY createdAt DESC'
+      );
+
+      console.log('ENTRIES BY DATE:', rows.values);
+
       const user: User | null = await this.userRepository.user();
 
       if (user?.isOnboarded) {
@@ -31,8 +37,12 @@ export class App implements OnInit {
         await this.router.navigate(['/onboarding'], { replaceUrl: true });
       }
 
-    } catch (e) {
-      console.error('App init error:', e);
+    }  catch (e) {
+      if (e instanceof Error && e.message.includes('already exists')) {
+        console.warn('Connection already exists, continuing...');
+      } else {
+        console.error('App init error:', e);
+      }
     } finally {
       this.loading.set(false);
     }

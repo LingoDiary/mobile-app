@@ -6,6 +6,7 @@
         <app-button
           [type]="'link'"
           (click)="goToSearch()"
+          [extraClass]="'p-0'"
         >
           <fa-icon [icon]="faSearch"/>
         </app-button>
@@ -16,20 +17,12 @@
     <div class="diary">
       <div class="virtual-scroll-box">
         <app-entries
-          class="diary__items"
           [items]="items()"
+          [useVirtualScroll]="true"
           (loadMore)="onBottomReached()"
         />
 
-        @if (!reachedEnd()) {
-          <div
-            class="observer-trigger"
-            appIntersectionObserver
-            (visible)="onBottomReached()"
-          ></div>
-        }
-
-        @if (items().length === 0 && reachedEnd()) {
+        @if (!items().length) {
           <div class="p">Not found</div>
         }
 

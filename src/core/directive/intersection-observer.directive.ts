@@ -17,7 +17,7 @@ export class IntersectionObserverDirective implements OnInit, OnDestroy {
       if (entries[0].isIntersecting) {
         this.visible.emit();
       }
-    }, { rootMargin: '150px' });
+    }, { rootMargin: '200px' });
 
     this.observer.observe(this.el.nativeElement);
   }
